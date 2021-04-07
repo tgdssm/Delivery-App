@@ -65,7 +65,7 @@ class _HomeScreenState extends State<HomeScreen>
                     ..rotateY((pi / 6) * value),
                   child: Scaffold(
                     appBar: AppBar(
-                        backgroundColor: Colors.grey[100],
+                        backgroundColor: Colors.white54,
                         elevation: 0.0,
                         leading: IconButton(
                           icon: Icon(Icons.menu_rounded),
@@ -203,6 +203,8 @@ class _HomeScreenState extends State<HomeScreen>
                       ),
                     ),
                     bottomNavigationBar: BottomNavigationBar(
+                      elevation: 0,
+                      backgroundColor: Colors.white54,
                       items: [
                         BottomNavigationBarItem(icon: Icon(Icons.home_rounded, size: 35,), label: ''),
                         BottomNavigationBarItem(icon: Icon(Icons.favorite_border_rounded, size: 35,), label: ''),

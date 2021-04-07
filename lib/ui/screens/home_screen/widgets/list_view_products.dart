@@ -32,8 +32,8 @@ class ListViewProducts extends StatelessWidget {
                         BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
                             offset: Offset(2, 2),
-                            blurRadius: 15,
-                            spreadRadius: 3),
+                            blurRadius: 5,
+                            spreadRadius: 1),
                       ],
                       color: Colors.white),
                   child: Column(
