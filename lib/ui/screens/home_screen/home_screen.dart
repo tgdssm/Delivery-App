@@ -33,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen>
             child: Container(
               width: 200.0,
               padding: EdgeInsets.only(top: 160.0, left: 30.0),
+              color: Theme.of(context).primaryColor,
               child: ListView(
                 children: [
                   DrawerItem(
@@ -91,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen>
                     body: SafeArea(
                       child: Container(
                         padding: EdgeInsets.all(18.0),
-                        color: Colors.grey[100],
+                        color: Colors.white54,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -181,16 +182,21 @@ class _HomeScreenState extends State<HomeScreen>
                                     ),
                                   ]),
                             ),
-                            Container(
-                              height: 200,
-                              child: TabBarView(
-                                  controller:
-                                      _homeScreenController.tabController,
-                                  children: [
-                                    ListViewProducts(foods: pizzas,),
-                                    Text('Hambúrgueres'),
-                                    Text('Regrigerantes'),
-                                  ]),
+                            Flexible(
+                              child: SingleChildScrollView(
+                                child: Container(
+                                  height: 321,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: TabBarView(
+                                      controller:
+                                          _homeScreenController.tabController,
+                                      children: [
+                                        ListViewProducts(foods: pizzas,),
+                                        Text('Hambúrgueres'),
+                                        Text('Regrigerantes'),
+                                      ]),
+                                ),
+                              ),
                             )
                           ],
                         ),
