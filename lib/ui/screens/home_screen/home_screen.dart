@@ -1,9 +1,11 @@
 import 'package:delivery_app/ui/screens/home_screen/home_screen_controller.dart';
 import 'package:delivery_app/ui/screens/home_screen/widgets/drawer_item.dart';
 import 'package:delivery_app/ui/screens/home_screen/widgets/list_view_products.dart';
-import 'package:delivery_app/utils/test_providers.dart';
+import 'package:delivery_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,7 +14,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
-  final _homeScreenController = HomeScreenController();
+  final _homeScreenController = Get.put(HomeScreenController());
 
   @override
   void initState() {
@@ -53,8 +55,8 @@ class _HomeScreenState extends State<HomeScreen>
               ),
             ),
           ),
-          TweenAnimationBuilder<double>(
-              tween: Tween(begin: 0, end: _homeScreenController.value),
+          Obx(() => TweenAnimationBuilder<double>(
+              tween: Tween(begin: 0, end: _homeScreenController.tweenEndValue),
               duration: Duration(milliseconds: 300),
               builder: (BuildContext _, double value, Widget __) {
                 return (Transform(
@@ -72,10 +74,10 @@ class _HomeScreenState extends State<HomeScreen>
                           color: Colors.black,
                           iconSize: 30.0,
                           onPressed: () {
-                            setState(() {
-                              _homeScreenController.value =
-                                  _homeScreenController.value == 0 ? 1 : 0;
-                            });
+                            _homeScreenController.tweenEndValue =
+                                _homeScreenController.tweenEndValue == 0
+                                    ? 1
+                                    : 0;
                           },
                         ),
                         title: Row(
@@ -191,9 +193,15 @@ class _HomeScreenState extends State<HomeScreen>
                                       controller:
                                           _homeScreenController.tabController,
                                       children: [
-                                        ListViewProducts(foods: pizzas,),
-                                        Text('Hambúrgueres'),
-                                        Text('Regrigerantes'),
+                                        ListViewProducts(
+                                          foods: pizzas,
+                                        ),
+                                        ListViewProducts(
+                                          foods: hamburgers,
+                                        ),
+                                        ListViewProducts(
+                                          drinks: softDrinks,
+                                        )
                                       ]),
                                 ),
                               ),
@@ -206,14 +214,29 @@ class _HomeScreenState extends State<HomeScreen>
                       elevation: 0,
                       backgroundColor: Colors.white54,
                       items: [
-                        BottomNavigationBarItem(icon: Icon(Icons.home_rounded, size: 35,), label: ''),
-                        BottomNavigationBarItem(icon: Icon(Icons.favorite_border_rounded, size: 35,), label: ''),
-                        BottomNavigationBarItem(icon: Icon(Icons.person_outline_rounded, size: 35,), label: ''),
+                        BottomNavigationBarItem(
+                            icon: Icon(
+                              Icons.home_rounded,
+                              size: 35,
+                            ),
+                            label: ''),
+                        BottomNavigationBarItem(
+                            icon: Icon(
+                              Icons.favorite_border_rounded,
+                              size: 35,
+                            ),
+                            label: ''),
+                        BottomNavigationBarItem(
+                            icon: Icon(
+                              Icons.person_outline_rounded,
+                              size: 35,
+                            ),
+                            label: ''),
                       ],
                     ),
                   ),
                 ));
-              }),
+              })),
           // GestureDetector(
           //   onHorizontalDragUpdate: (DragUpdateDetails dragUpdateDetails) {
           //     if (dragUpdateDetails.delta.dx > 0) {

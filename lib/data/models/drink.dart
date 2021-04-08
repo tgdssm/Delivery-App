@@ -1,12 +1,12 @@
 import 'package:delivery_app/data/models/product.dart';
 
-class Food extends Product {
-  List<String> ingredients;
+class Drink extends Product {
+  int liter;
 
-  Food({
+  Drink({
     String name,
     String photo,
     double price,
-    this.ingredients,
+    this.liter,
   }) : super(name: name, photo: photo, price: price);
 }
