@@ -1,3 +1,5 @@
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:delivery_app/ui/layouts/small/home_screen/home_screen_small.dart';
 import 'package:delivery_app/ui/screens/home_screen/home_screen_controller.dart';
 import 'package:delivery_app/ui/screens/home_screen/widgets/drawer_item.dart';
 import 'package:delivery_app/ui/screens/home_screen/widgets/list_view_products.dart';
@@ -92,122 +94,127 @@ class _HomeScreenState extends State<HomeScreen>
                           ],
                         )),
                     body: SafeArea(
-                      child: Container(
-                        padding: EdgeInsets.all(18.0),
-                        color: Colors.white54,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Container(
-                              width: 185,
-                              height: 82,
-                              alignment: Alignment.topLeft,
-                              child: Text(
-                                'Comidas deliciosas para você',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 34.0),
-                              ),
-                            ),
-                            Container(
-                              height: 60,
-                              width: 314,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(30.0),
-                                  color: Color(0xffEFEEEE)),
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 25.0),
-                                child: TextFormField(
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.search),
-                                      hintText: 'Pesquisar',
-                                      enabledBorder: OutlineInputBorder(
-                                          borderSide: BorderSide.none),
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide.none)),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          if(constraints.maxHeight <= 570 && constraints.maxWidth <= 320){
+                            return  HomeScreenSmall(homeScreenController: _homeScreenController,);
+                          }
+                          return  Container(
+                            padding: EdgeInsets.all(18.0),
+                            color: Colors.white54,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Container(
+                                  width: 185,
+                                  height: 82,
+                                  alignment: Alignment.topLeft,
+                                  child: Text(
+                                    'Comidas deliciosas para você',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 34.0),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Container(
-                              child: TabBar(
-                                  indicatorColor:
+                                Container(
+                                  height: 60,
+                                  width: 314,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                      color: Color(0xffEFEEEE)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 25.0),
+                                    child: TextFormField(
+                                      decoration: InputDecoration(
+                                          prefixIcon: Icon(Icons.search),
+                                          hintText: 'Pesquisar',
+                                          enabledBorder: OutlineInputBorder(
+                                              borderSide: BorderSide.none),
+                                          border: OutlineInputBorder(
+                                              borderSide: BorderSide.none)),
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  child: Obx(() => TabBar(
+                                      indicatorColor:
                                       Theme.of(context).primaryColor,
-                                  isScrollable: true,
-                                  onTap: (int selectedTab) {
-                                    setState(() {
-                                      _homeScreenController.selectedTab =
-                                          selectedTab;
-                                    });
-                                  },
-                                  controller:
-                                      _homeScreenController.tabController,
-                                  tabs: [
-                                    Tab(
-                                      child: Text(
-                                        'Pizzas',
-                                        style: TextStyle(
-                                            color: _homeScreenController
-                                                        .selectedTab ==
-                                                    0
-                                                ? Theme.of(context).primaryColor
-                                                : Colors.black,
-                                            fontSize: 17.0,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                    ),
-                                    Tab(
-                                      child: Text(
-                                        'Hambúrgueres',
-                                        style: TextStyle(
-                                            color: _homeScreenController
-                                                        .selectedTab ==
-                                                    1
-                                                ? Theme.of(context).primaryColor
-                                                : Colors.black,
-                                            fontSize: 17.0,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                    ),
-                                    Tab(
-                                      child: Text(
-                                        'Regrigerantes',
-                                        style: TextStyle(
-                                            color: _homeScreenController
-                                                        .selectedTab ==
-                                                    2
-                                                ? Theme.of(context).primaryColor
-                                                : Colors.black,
-                                            fontSize: 17.0,
-                                            fontWeight: FontWeight.normal),
-                                      ),
-                                    ),
-                                  ]),
-                            ),
-                            Flexible(
-                              child: SingleChildScrollView(
-                                child: Container(
-                                  height: 321,
-                                  width: MediaQuery.of(context).size.width,
-                                  child: TabBarView(
+                                      isScrollable: true,
+                                      onTap: (int selectedTab) {
+                                        _homeScreenController.selectedTab.value =
+                                            selectedTab;
+                                      },
                                       controller:
-                                          _homeScreenController.tabController,
-                                      children: [
-                                        ListViewProducts(
-                                          foods: pizzas,
+                                      _homeScreenController.tabController,
+                                      tabs: [
+                                        Tab(
+                                          child: Text(
+                                            'Pizzas',
+                                            style: TextStyle(
+                                                color: _homeScreenController
+                                                    .selectedTab.value ==
+                                                    0
+                                                    ? Theme.of(context).primaryColor
+                                                    : Colors.black,
+                                                fontSize: 17.0,
+                                                fontWeight: FontWeight.normal),
+                                          ),
                                         ),
-                                        ListViewProducts(
-                                          foods: hamburgers,
+                                        Tab(
+                                          child: Text(
+                                            'Hambúrgueres',
+                                            style: TextStyle(
+                                                color: _homeScreenController
+                                                    .selectedTab.value ==
+                                                    1
+                                                    ? Theme.of(context).primaryColor
+                                                    : Colors.black,
+                                                fontSize: 17.0,
+                                                fontWeight: FontWeight.normal),
+                                          ),
                                         ),
-                                        ListViewProducts(
-                                          drinks: softDrinks,
-                                        )
-                                      ]),
+                                        Tab(
+                                          child: Text(
+                                            'Regrigerantes',
+                                            style: TextStyle(
+                                                color: _homeScreenController
+                                                    .selectedTab.value ==
+                                                    2
+                                                    ? Theme.of(context).primaryColor
+                                                    : Colors.black,
+                                                fontSize: 17.0,
+                                                fontWeight: FontWeight.normal),
+                                          ),
+                                        ),
+                                      ])),
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
+                                Flexible(
+                                  child: SingleChildScrollView(
+                                    child: Container(
+                                      height: 321,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: TabBarView(
+                                          controller:
+                                          _homeScreenController.tabController,
+                                          children: [
+                                            ListViewProducts(
+                                              foods: pizzas,
+                                            ),
+                                            ListViewProducts(
+                                              foods: hamburgers,
+                                            ),
+                                            ListViewProducts(
+                                              drinks: softDrinks,
+                                            )
+                                          ]),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     ),
                     bottomNavigationBar: BottomNavigationBar(
