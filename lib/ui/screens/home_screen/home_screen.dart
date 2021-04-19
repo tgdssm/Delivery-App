@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delivery_app/ui/layouts/small/home_screen/home_screen_small.dart';
+import 'package:delivery_app/ui/layouts/home_screen/tab_bar_view_home_screen.dart';
 import 'package:delivery_app/ui/screens/home_screen/home_screen_controller.dart';
 import 'package:delivery_app/ui/screens/home_screen/widgets/drawer_item.dart';
 import 'package:delivery_app/ui/screens/home_screen/widgets/list_view_products.dart';
@@ -12,12 +12,12 @@ import 'package:get/get.dart';
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
+
 }
 
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   final _homeScreenController = Get.put(HomeScreenController());
-
   @override
   void initState() {
     // TODO: implement initState
@@ -67,39 +67,41 @@ class _HomeScreenState extends State<HomeScreen>
                     ..setEntry(3, 2, 0.001)
                     ..setEntry(0, 3, 200 * value)
                     ..rotateY((pi / 6) * value),
-                  child: Scaffold(
-                    appBar: AppBar(
-                        backgroundColor: Colors.white54,
-                        elevation: 0.0,
-                        leading: IconButton(
-                          icon: Icon(Icons.menu_rounded),
-                          color: Colors.black,
-                          iconSize: 30.0,
-                          onPressed: () {
-                            _homeScreenController.tweenEndValue =
-                                _homeScreenController.tweenEndValue == 0
-                                    ? 1
-                                    : 0;
-                          },
-                        ),
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            IconButton(
-                              icon: Icon(Icons.shopping_cart_outlined),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      return Scaffold(
+                        appBar: AppBar(
+                            backgroundColor: Colors.white54,
+                            elevation: 0.0,
+                            leading: IconButton(
+                              icon: Icon(Icons.menu_rounded),
                               color: Colors.black,
                               iconSize: 30.0,
-                              onPressed: () {},
+                              onPressed: () {
+                                _homeScreenController.tweenEndValue =
+                                    _homeScreenController.tweenEndValue == 0
+                                        ? 1
+                                        : 0;
+                              },
                             ),
-                          ],
-                        )),
-                    body: SafeArea(
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          if(constraints.maxHeight <= 570 && constraints.maxWidth <= 320){
-                            return  HomeScreenSmall(homeScreenController: _homeScreenController,);
-                          }
-                          return  Container(
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                IconButton(
+                                  icon: Icon(Icons.shopping_cart_outlined),
+                                  color: Colors.black,
+                                  iconSize: 30.0,
+                                  onPressed: () {},
+                                ),
+                              ],
+                            )),
+                        body: ConstrainedBox(
+                          constraints: BoxConstraints(
+                            maxWidth: 800,
+                            maxHeight: 1014
+                          ),
+                          child: SafeArea(
+                              child: Container(
                             padding: EdgeInsets.all(18.0),
                             color: Colors.white54,
                             child: Column(
@@ -110,16 +112,17 @@ class _HomeScreenState extends State<HomeScreen>
                                   width: 185,
                                   height: 82,
                                   alignment: Alignment.topLeft,
-                                  child: Text(
+                                  child: AutoSizeText(
                                     'Comidas deliciosas para você',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 34.0),
+                                    maxLines: 2,
+                                    minFontSize: 20.0,
                                   ),
                                 ),
                                 Container(
                                   height: 60,
-                                  width: 314,
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(30.0),
                                       color: Color(0xffEFEEEE)),
@@ -137,110 +140,158 @@ class _HomeScreenState extends State<HomeScreen>
                                   ),
                                 ),
                                 Container(
-                                  child: Obx(() => TabBar(
-                                      indicatorColor:
-                                      Theme.of(context).primaryColor,
-                                      isScrollable: true,
-                                      onTap: (int selectedTab) {
-                                        _homeScreenController.selectedTab.value =
-                                            selectedTab;
-                                      },
-                                      controller:
-                                      _homeScreenController.tabController,
-                                      tabs: [
-                                        Tab(
-                                          child: Text(
-                                            'Pizzas',
-                                            style: TextStyle(
-                                                color: _homeScreenController
-                                                    .selectedTab.value ==
-                                                    0
-                                                    ? Theme.of(context).primaryColor
-                                                    : Colors.black,
-                                                fontSize: 17.0,
-                                                fontWeight: FontWeight.normal),
-                                          ),
-                                        ),
-                                        Tab(
-                                          child: Text(
-                                            'Hambúrgueres',
-                                            style: TextStyle(
-                                                color: _homeScreenController
-                                                    .selectedTab.value ==
-                                                    1
-                                                    ? Theme.of(context).primaryColor
-                                                    : Colors.black,
-                                                fontSize: 17.0,
-                                                fontWeight: FontWeight.normal),
-                                          ),
-                                        ),
-                                        Tab(
-                                          child: Text(
-                                            'Regrigerantes',
-                                            style: TextStyle(
-                                                color: _homeScreenController
-                                                    .selectedTab.value ==
-                                                    2
-                                                    ? Theme.of(context).primaryColor
-                                                    : Colors.black,
-                                                fontSize: 17.0,
-                                                fontWeight: FontWeight.normal),
-                                          ),
-                                        ),
-                                      ])),
+                                  child: Center(
+                                    child: Obx(() => TabBar(
+                                            indicatorColor:
+                                                Theme.of(context).primaryColor,
+                                            isScrollable: true,
+                                            onTap: (int selectedTab) {
+                                              _homeScreenController.selectedTab
+                                                  .value = selectedTab;
+                                            },
+                                            controller: _homeScreenController
+                                                .tabController,
+                                            tabs: [
+                                              Tab(
+                                                child: Text(
+                                                  'Pizzas',
+                                                  style: TextStyle(
+                                                      color: _homeScreenController
+                                                                  .selectedTab
+                                                                  .value ==
+                                                              0
+                                                          ? Theme.of(context)
+                                                              .primaryColor
+                                                          : Colors.black,
+                                                      fontSize: 17.0,
+                                                      fontWeight:
+                                                          FontWeight.normal),
+                                                ),
+                                              ),
+                                              Tab(
+                                                child: Text(
+                                                  'Hambúrgueres',
+                                                  style: TextStyle(
+                                                      color: _homeScreenController
+                                                                  .selectedTab
+                                                                  .value ==
+                                                              1
+                                                          ? Theme.of(context)
+                                                              .primaryColor
+                                                          : Colors.black,
+                                                      fontSize: 17.0,
+                                                      fontWeight:
+                                                          FontWeight.normal),
+                                                ),
+                                              ),
+                                              Tab(
+                                                child: Text(
+                                                  'Regrigerantes',
+                                                  style: TextStyle(
+                                                      color: _homeScreenController
+                                                                  .selectedTab
+                                                                  .value ==
+                                                              2
+                                                          ? Theme.of(context)
+                                                              .primaryColor
+                                                          : Colors.black,
+                                                      fontSize: 17.0,
+                                                      fontWeight:
+                                                          FontWeight.normal),
+                                                ),
+                                              ),
+                                            ])),
+                                  ),
                                 ),
                                 Flexible(
                                   child: SingleChildScrollView(
-                                    child: Container(
-                                      height: 321,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: TabBarView(
-                                          controller:
-                                          _homeScreenController.tabController,
-                                          children: [
-                                            ListViewProducts(
-                                              foods: pizzas,
-                                            ),
-                                            ListViewProducts(
-                                              foods: hamburgers,
-                                            ),
-                                            ListViewProducts(
-                                              drinks: softDrinks,
-                                            )
-                                          ]),
+                                    child: ConstrainedBox(
+                                      constraints: BoxConstraints(
+                                        maxHeight: constraints.maxHeight,
+                                      ),
+                                      child: LayoutBuilder(
+                                        builder: (context, constraints) {
+                                          print(constraints.maxHeight);
+                                          if (constraints.maxHeight <= 570) {
+                                            return Container(
+                                              height: 200,
+                                              width: constraints.maxWidth,
+                                              child: TabBarView(
+                                                  controller: _homeScreenController.tabController,
+                                                  children: [
+                                                    ListViewProducts(
+                                                      foods: pizzas,
+                                                    ),
+                                                    ListViewProducts(
+                                                      foods: hamburgers,
+                                                    ),
+                                                    ListViewProducts(
+                                                      drinks: softDrinks,
+                                                    )
+                                                  ]),
+                                            );
+                                          }
+                                          return Container(
+                                            child: Text('deu ruim'),
+                                          );
+                                        },
+                                      ),
                                     ),
                                   ),
                                 )
+
+                                // Flexible(
+                                //   child: SingleChildScrollView(
+                                //     child: Container(
+                                //       height: 320,
+                                //       width: double.infinity,
+                                //       child: TabBarView(
+                                //           controller:
+                                //               _homeScreenController.tabController,
+                                //           children: [
+                                //             ListViewProducts(
+                                //               foods: pizzas,
+                                //             ),
+                                //             ListViewProducts(
+                                //               foods: hamburgers,
+                                //             ),
+                                //             ListViewProducts(
+                                //               drinks: softDrinks,
+                                //             )
+                                //           ]),
+                                //     ),
+                                //   ),
+                                // )
                               ],
                             ),
-                          );
-                        },
-                      ),
-                    ),
-                    bottomNavigationBar: BottomNavigationBar(
-                      elevation: 0,
-                      backgroundColor: Colors.white54,
-                      items: [
-                        BottomNavigationBarItem(
-                            icon: Icon(
-                              Icons.home_rounded,
-                              size: 35,
-                            ),
-                            label: ''),
-                        BottomNavigationBarItem(
-                            icon: Icon(
-                              Icons.favorite_border_rounded,
-                              size: 35,
-                            ),
-                            label: ''),
-                        BottomNavigationBarItem(
-                            icon: Icon(
-                              Icons.person_outline_rounded,
-                              size: 35,
-                            ),
-                            label: ''),
-                      ],
-                    ),
+                          )),
+                        ),
+                        bottomNavigationBar: BottomNavigationBar(
+                          elevation: 0,
+                          backgroundColor: Colors.white54,
+                          items: [
+                            BottomNavigationBarItem(
+                                icon: Icon(
+                                  Icons.home_rounded,
+                                  size: 35,
+                                ),
+                                label: ''),
+                            BottomNavigationBarItem(
+                                icon: Icon(
+                                  Icons.favorite_border_rounded,
+                                  size: 35,
+                                ),
+                                label: ''),
+                            BottomNavigationBarItem(
+                                icon: Icon(
+                                  Icons.person_outline_rounded,
+                                  size: 35,
+                                ),
+                                label: ''),
+                          ],
+                        ),
+                      );
+                    },
                   ),
                 ));
               })),

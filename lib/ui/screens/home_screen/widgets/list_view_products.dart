@@ -15,8 +15,8 @@ class ListViewProducts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      if (constraints.maxHeight <= 570 && constraints.maxWidth <= 320) {
-        if (foods != null){
+      if (constraints.maxHeight <= 230) {
+        if (foods != null) {
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
@@ -26,7 +26,6 @@ class ListViewProducts extends StatelessWidget {
                 onTap: () => Get.to(ProductInfoScreen(food: foods[index])),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 5.0),
-                  // color: Colors.black,
                   width: 180,
                   child: Stack(
                     children: [
@@ -78,17 +77,17 @@ class ListViewProducts extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                          left: 15,
+                          left: 25,
                           top: 0,
                           child: Hero(
                             tag: foods[index].photo,
                             child: Container(
-                              width: 120,
-                              height: 120,
+                              width: 100,
+                              height: 100,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage(foods[index].photo),
-                                  )),
+                                image: AssetImage(foods[index].photo),
+                              )),
                             ),
                           ))
                     ],
@@ -97,7 +96,7 @@ class ListViewProducts extends StatelessWidget {
               );
             },
           );
-        } else
+        } else {
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
@@ -159,17 +158,17 @@ class ListViewProducts extends StatelessWidget {
                         ),
                       ),
                       Positioned(
-                          left: 15,
+                          left: 25,
                           top: 0,
                           child: Hero(
                             tag: drinks[index].photo,
                             child: Container(
-                              width: 120,
-                              height: 120,
+                              width: 100,
+                              height: 100,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage(drinks[index].photo),
-                                  )),
+                                image: AssetImage(drinks[index].photo),
+                              )),
                             ),
                           ))
                     ],
@@ -178,6 +177,7 @@ class ListViewProducts extends StatelessWidget {
               );
             },
           );
+        }
       }
       return ListView.builder(
         shrinkWrap: true,
@@ -248,8 +248,8 @@ class ListViewProducts extends StatelessWidget {
                           height: 150,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage(foods[index].photo),
-                              )),
+                            image: AssetImage(foods[index].photo),
+                          )),
                         ),
                       ))
                 ],

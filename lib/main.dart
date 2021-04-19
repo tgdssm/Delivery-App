@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
-  // runApp(DevicePreview(builder: (_) => MyApp()));
-  runApp(MyApp());
+  runApp(DevicePreview(builder: (_) => MyApp()));
+  // runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -23,8 +23,8 @@ class _MyAppState extends State<MyApp> {
       ),
       title: 'Food Delivery',
       home: HomeScreen(),
-      // builder: DevicePreview.appBuilder,
-      // locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
+      locale: DevicePreview.locale(context),
     );
   }
 }
