@@ -95,10 +95,13 @@ final softDrinks = [
     price: 44.99,
   ),
 ];
-
 String maskedMoney(double money) {
   final maskedController = MoneyMaskedTextController(
       precision: 2, decimalSeparator: ',', leftSymbol: 'R\$ ');
   maskedController.updateValue(money);
   return maskedController.text;
 }
+
+// BreakPoints
+const mobileBreakPointSmallHeight = 570.0;
+const mobileBreakPointMediumHeight = 900.0;

@@ -12,7 +12,6 @@ import 'package:get/get.dart';
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
-
 }
 
 class _HomeScreenState extends State<HomeScreen>
@@ -97,8 +96,7 @@ class _HomeScreenState extends State<HomeScreen>
                             )),
                         body: ConstrainedBox(
                           constraints: BoxConstraints(
-                            maxWidth: 800,
-                            maxHeight: 1014
+                            maxWidth: 1024,
                           ),
                           child: SafeArea(
                               child: Container(
@@ -109,16 +107,17 @@ class _HomeScreenState extends State<HomeScreen>
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Container(
-                                  width: 185,
-                                  height: 82,
                                   alignment: Alignment.topLeft,
-                                  child: AutoSizeText(
-                                    'Comidas deliciosas para você',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 34.0),
-                                    maxLines: 2,
-                                    minFontSize: 20.0,
+                                  child: FractionallySizedBox(
+                                    widthFactor: .75,
+                                    child: AutoSizeText(
+                                      'Comidas deliciosas para você',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 34.0),
+                                      maxLines: 2,
+                                      minFontSize: 20.0,
+                                    ),
                                   ),
                                 ),
                                 Container(
@@ -212,12 +211,37 @@ class _HomeScreenState extends State<HomeScreen>
                                       child: LayoutBuilder(
                                         builder: (context, constraints) {
                                           print(constraints.maxHeight);
-                                          if (constraints.maxHeight <= 570) {
+                                          if (constraints.maxHeight <=
+                                              mobileBreakPointSmallHeight) {
                                             return Container(
                                               height: 200,
                                               width: constraints.maxWidth,
                                               child: TabBarView(
-                                                  controller: _homeScreenController.tabController,
+                                                  controller:
+                                                      _homeScreenController
+                                                          .tabController,
+                                                  children: [
+                                                    ListViewProducts(
+                                                      foods: pizzas,
+                                                    ),
+                                                    ListViewProducts(
+                                                      foods: hamburgers,
+                                                    ),
+                                                    ListViewProducts(
+                                                      drinks: softDrinks,
+                                                    )
+                                                  ]),
+                                            );
+                                          }
+                                          if (constraints.maxHeight <=
+                                              mobileBreakPointMediumHeight) {
+                                            return Container(
+                                              height: 320,
+                                              width: constraints.maxWidth,
+                                              child: TabBarView(
+                                                  controller:
+                                                      _homeScreenController
+                                                          .tabController,
                                                   children: [
                                                     ListViewProducts(
                                                       foods: pizzas,

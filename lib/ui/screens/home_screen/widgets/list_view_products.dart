@@ -179,6 +179,169 @@ class ListViewProducts extends StatelessWidget {
           );
         }
       }
+      if (constraints.maxHeight <= 320) {
+        if (foods != null) {
+          return ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: foods.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () => Get.to(ProductInfoScreen(food: foods[index])),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  // color: Colors.black,
+                  width: 220,
+                  height: 321,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: 10,
+                        child: Container(
+                          width: 190,
+                          height: 250,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30.0),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    offset: Offset(2, 2),
+                                    blurRadius: 5,
+                                    spreadRadius: 1),
+                              ],
+                              color: Colors.white),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(top: 30.0),
+                                  width: 150,
+                                  child: Text(
+                                    foods[index].name,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    // overflow: TextOverflow.ellipsis,
+                                  )),
+                              Container(
+                                  padding: EdgeInsets.only(top: 10.0),
+                                  width: 100,
+                                  child: Text(
+                                    '${maskedMoney(foods[index].price)}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: 17),
+                                    textAlign: TextAlign.center,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                          left: 20,
+                          top: 0,
+                          child: Hero(
+                            tag: foods[index].photo,
+                            child: Container(
+                              width: 150,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(foods[index].photo),
+                                  )),
+                            ),
+                          ))
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        } else {
+          return ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: drinks.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                onTap: () => Get.to(ProductInfoScreen(drink: drinks[index])),
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  // color: Colors.black,
+                  width: 220,
+                  height: 321,
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        bottom: 10,
+                        child: Container(
+                          width: 190,
+                          height: 250,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(30.0),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    offset: Offset(2, 2),
+                                    blurRadius: 5,
+                                    spreadRadius: 1),
+                              ],
+                              color: Colors.white),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                  margin: EdgeInsets.only(top: 30.0),
+                                  width: 150,
+                                  child: Text(
+                                    drinks[index].name,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                    // overflow: TextOverflow.ellipsis,
+                                  )),
+                              Container(
+                                  padding: EdgeInsets.only(top: 10.0),
+                                  width: 100,
+                                  child: Text(
+                                    '${maskedMoney(drinks[index].price)}',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: Theme.of(context).primaryColor,
+                                        fontSize: 17),
+                                    textAlign: TextAlign.center,
+                                  )),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                          left: 20,
+                          top: 0,
+                          child: Hero(
+                            tag: drinks[index].photo,
+                            child: Container(
+                              width: 150,
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(drinks[index].photo),
+                                  )),
+                            ),
+                          ))
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
+        }
+      }
       return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
