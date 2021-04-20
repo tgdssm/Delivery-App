@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delivery_app/ui/layouts/home_screen/tab_bar_view_home_screen.dart';
+import 'package:delivery_app/ui/screens/cart_screen/cart_screen.dart';
+import 'package:delivery_app/ui/screens/cart_screen/cart_screen_controller.dart';
 import 'package:delivery_app/ui/screens/home_screen/home_screen_controller.dart';
 import 'package:delivery_app/ui/screens/home_screen/widgets/drawer_item.dart';
 import 'package:delivery_app/ui/screens/home_screen/widgets/list_view_products.dart';
@@ -17,6 +18,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   final _homeScreenController = Get.put(HomeScreenController());
+  final _cartScreenController = Get.put(CartScreenController());
+
   @override
   void initState() {
     // TODO: implement initState
@@ -86,17 +89,60 @@ class _HomeScreenState extends State<HomeScreen>
                             title: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
-                                IconButton(
-                                  icon: Icon(Icons.shopping_cart_outlined),
-                                  color: Colors.black,
-                                  iconSize: 30.0,
-                                  onPressed: () {},
-                                ),
+                                Obx(() {
+                                  return _cartScreenController
+                                              .products.length <=
+                                          0
+                                      ? IconButton(
+                                          icon: Icon(
+                                              Icons.shopping_cart_outlined),
+                                          color: Colors.black,
+                                          iconSize: 30.0,
+                                          onPressed: () {
+                                            Get.to(CartScreen());
+                                          },
+                                        )
+                                      : Container(
+                                          child: Stack(
+                                            children: [
+                                              IconButton(
+                                                icon: Icon(Icons
+                                                    .shopping_cart_outlined),
+                                                color: Colors.black,
+                                                iconSize: 30.0,
+                                                onPressed: () {
+                                                  Get.to(CartScreen());
+                                                },
+                                              ),
+                                              Positioned(
+                                                bottom: 28.0,
+                                                left: 17.0,
+                                                child: Container(
+                                                  width: 15.0,
+                                                  height: 15.0,
+                                                  alignment: Alignment.center,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      shape: BoxShape.circle),
+                                                  child: Text(
+                                                    '${_cartScreenController.products.length}',
+                                                    style: TextStyle(
+                                                        fontSize: 15,
+                                                        fontWeight: FontWeight.bold,
+                                                        color: Theme.of(context)
+                                                            .primaryColor),
+                                                  ),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                }),
                               ],
                             )),
                         body: ConstrainedBox(
                           constraints: BoxConstraints(
-                            maxWidth: 1024,
+                            maxWidth: maxWidthScreen,
                           ),
                           child: SafeArea(
                               child: Container(

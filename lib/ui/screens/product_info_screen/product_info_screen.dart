@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductInfoScreen extends StatelessWidget {
-  final _productInfoScreenController = ProductInfoScreenController();
+  final _productInfoScreenController = Get.put(ProductInfoScreenController());
   final Food food;
   final Drink drink;
   ProductInfoScreen({this.food, this.drink});
@@ -45,7 +45,7 @@ class ProductInfoScreen extends StatelessWidget {
                 ),
           body: food != null
               ? ConstrainedBox(
-                  constraints: BoxConstraints(maxWidth: 1024),
+                  constraints: BoxConstraints(maxWidth: maxWidthScreen),
                   child: SafeArea(
                       child: ConstrainedBox(
                     constraints: BoxConstraints(

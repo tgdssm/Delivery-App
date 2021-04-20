@@ -102,6 +102,12 @@ String maskedMoney(double money) {
   return maskedController.text;
 }
 
+// Sizes
+const mainButtonHeight = 70.0;
+
+// Constraints Screen
+const maxWidthScreen = 1024.0;
+
 // BreakPoints
 const mobileBreakPointSmallHeight = 570.0;
 const mobileBreakPointMediumHeight = 900.0;

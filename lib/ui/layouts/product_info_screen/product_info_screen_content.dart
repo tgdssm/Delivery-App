@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/data/models/food.dart';
+import 'package:delivery_app/ui/layouts/product_info_screen/widgets/quantity_alert.dart';
 import 'package:delivery_app/ui/screens/product_info_screen/product_info_screen_controller.dart';
 import 'package:delivery_app/utils/globals.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +22,8 @@ class ProductInfoScreenContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-      builder: (context, constraints){
-        if(constraints.maxHeight <=
-            mobileBreakPointSmallHeight){
+      builder: (context, constraints) {
+        if (constraints.maxHeight <= mobileBreakPointSmallHeight) {
           return CustomScrollView(
             slivers: [
               SliverAppBar(
@@ -49,7 +49,8 @@ class ProductInfoScreenContent extends StatelessWidget {
                   ],
                 ),
               ),
-              SliverList(delegate: SliverChildListDelegate([
+              SliverList(
+                  delegate: SliverChildListDelegate([
                 Container(
                   padding: EdgeInsets.all(
                     18.0,
@@ -65,11 +66,15 @@ class ProductInfoScreenContent extends StatelessWidget {
                           width: 240,
                           height: 180,
                           decoration: BoxDecoration(
-                            image: DecorationImage(image: AssetImage(food.photo), fit: BoxFit.scaleDown),
+                            image: DecorationImage(
+                                image: AssetImage(food.photo),
+                                fit: BoxFit.scaleDown),
                           ),
                         ),
                       ),
-                      SizedBox(height: 10.0,),
+                      SizedBox(
+                        height: 10.0,
+                      ),
                       Column(
                         children: [
                           Container(
@@ -108,113 +113,124 @@ class ProductInfoScreenContent extends StatelessWidget {
                       ),
                       Container(
                           child: FractionallySizedBox(
-                            widthFactor: .85,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0)),
-                              elevation: 1,
-                              shadowColor: Colors.grey.withOpacity(0.5),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.food_bank_rounded, size: 30,),
-                                          SizedBox(width: 5.0,),
-                                          Text(
-                                            'Ingredientes',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.black),
-                                          ),
-                                        ],
+                        widthFactor: .85,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0)),
+                          elevation: 1,
+                          shadowColor: Colors.grey.withOpacity(0.5),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.food_bank_rounded,
+                                        size: 30,
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      padding: EdgeInsets.only(left: 35.0),
-                                      child: AutoSizeText(
-                                        '${productInfoScreenController.ingredients(food.ingredients)}.',
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      Text(
+                                        'Ingredientes',
                                         style: TextStyle(
-                                            color: Theme.of(context).primaryColor,
-                                            fontWeight: FontWeight.w300,
-                                            fontSize: 17),
-                                        maxLines: 2,
-                                        minFontSize: productInfoScreenController.minFontSize,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
+                                SizedBox(
+                                  height: 5.0,
+                                ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  padding: EdgeInsets.only(left: 35.0),
+                                  child: AutoSizeText(
+                                    '${productInfoScreenController.ingredients(food.ingredients)}.',
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 17),
+                                    maxLines: 2,
+                                    minFontSize: 15,
+                                  ),
+                                ),
+                              ],
                             ),
-                          )),
+                          ),
+                        ),
+                      )),
                       Container(
                           child: FractionallySizedBox(
-                            widthFactor: productInfoScreenController.widthFactor,
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0)),
-                              elevation: 1,
-                              shadowColor: Colors.grey.withOpacity(0.5),
-                              child: Padding(
-                                padding: const EdgeInsets.all(15.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.topLeft,
-                                      child: Row(
-                                        children: [
-                                          Icon(Icons.timer_rounded, size: 30.0,),
-                                          SizedBox(width: 5.0,),
-                                          Text(
-                                            'Tempo de entrega',
-                                            style: TextStyle(
-                                                fontSize: 18,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.black),
-                                          ),
-                                        ],
+                        widthFactor: .85,
+                        child: Card(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30.0)),
+                          elevation: 1,
+                          shadowColor: Colors.grey.withOpacity(0.5),
+                          child: Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.topLeft,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.timer_rounded,
+                                        size: 30.0,
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 10.0,
-                                    ),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      padding: EdgeInsets.only(left: 35.0),
-                                      child: AutoSizeText(
-                                        '50 - 60 minutos.',
+                                      SizedBox(
+                                        width: 5.0,
+                                      ),
+                                      Text(
+                                        'Tempo de entrega',
                                         style: TextStyle(
-                                            color: Theme.of(context).primaryColor,
-                                            fontWeight: FontWeight.w300,
-                                            fontSize: 17),
-                                        maxLines: 1,
-                                        minFontSize: productInfoScreenController.minFontSize,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
+                                SizedBox(
+                                  height: 10.0,
+                                ),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  padding: EdgeInsets.only(left: 35.0),
+                                  child: AutoSizeText(
+                                    '50 - 60 minutos.',
+                                    style: TextStyle(
+                                        color: Theme.of(context).primaryColor,
+                                        fontWeight: FontWeight.w300,
+                                        fontSize: 17),
+                                    maxLines: 1,
+                                    minFontSize: 15,
+                                  ),
+                                ),
+                              ],
                             ),
-                          )),
+                          ),
+                        ),
+                      )),
                       SizedBox(
                         height: 10.0,
                       ),
                       Container(
-                        height: 70.0,
+                        height: mainButtonHeight,
                         child: FractionallySizedBox(
-                          widthFactor: productInfoScreenController.widthFactor,
+                          widthFactor: .85,
                           child: MaterialButton(
                             onPressed: () {
-                              print(MediaQuery.of(context).size.width);
-                              print(MediaQuery.of(context).size.height);
+                              showDialog(context: context, builder: (context){
+                                return QuantityAlert(productInfoScreenController: productInfoScreenController, food: food);
+                              });
                             },
                             child: Text(
                               'Adicionar ao carrinho',
@@ -235,8 +251,7 @@ class ProductInfoScreenContent extends StatelessWidget {
             ],
           );
         }
-        if (constraints.maxHeight <=
-            mobileBreakPointMediumHeight) {
+        if (constraints.maxHeight <= mobileBreakPointMediumHeight) {
           return Container(
             padding: EdgeInsets.all(
               18.0,
@@ -253,8 +268,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                     height: 235,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(food.photo),
-                          fit: BoxFit.scaleDown),
+                          image: AssetImage(food.photo), fit: BoxFit.scaleDown),
                     ),
                   ),
                 ),
@@ -282,8 +296,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                     ),
                     Container(
                       width: constraints.maxWidth,
-                      padding:
-                      EdgeInsets.symmetric(horizontal: 25),
+                      padding: EdgeInsets.symmetric(horizontal: 25),
                       alignment: Alignment.center,
                       child: Text(
                         maskedMoney(food.price),
@@ -297,125 +310,123 @@ class ProductInfoScreenContent extends StatelessWidget {
                 ),
                 Container(
                     child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      elevation: 1,
-                      shadowColor: Colors.grey.withOpacity(0.5),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.food_bank_rounded,
-                                    size: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  Text(
-                                    'Ingredientes',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black),
-                                  ),
-                                ],
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                  elevation: 1,
+                  shadowColor: Colors.grey.withOpacity(0.5),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.food_bank_rounded,
+                                size: 30,
                               ),
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              padding: EdgeInsets.only(left: 35.0),
-                              child: AutoSizeText(
-                                '${productInfoScreenController.ingredients(food.ingredients)}.',
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                'Ingredientes',
                                 style: TextStyle(
-                                    color: Theme.of(context)
-                                        .primaryColor,
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 17),
-                                maxLines: 3,
-                                minFontSize: 15,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    )),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: 35.0),
+                          child: AutoSizeText(
+                            '${productInfoScreenController.ingredients(food.ingredients)}.',
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 17),
+                            maxLines: 3,
+                            minFontSize: 15,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )),
                 Container(
                     child: Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      elevation: 1,
-                      shadowColor: Colors.grey.withOpacity(0.5),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.topLeft,
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.timer_rounded,
-                                    size: 30.0,
-                                  ),
-                                  SizedBox(
-                                    width: 5.0,
-                                  ),
-                                  Text(
-                                    'Tempo de entrega',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.black),
-                                  ),
-                                ],
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0)),
+                  elevation: 1,
+                  shadowColor: Colors.grey.withOpacity(0.5),
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      children: [
+                        Container(
+                          alignment: Alignment.topLeft,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.timer_rounded,
+                                size: 30.0,
                               ),
-                            ),
-                            SizedBox(
-                              height: 5.0,
-                            ),
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              padding: EdgeInsets.only(left: 35.0),
-                              child: Text(
-                                '50 - 60 minutos.',
+                              SizedBox(
+                                width: 5.0,
+                              ),
+                              Text(
+                                'Tempo de entrega',
                                 style: TextStyle(
-                                    color: Theme.of(context)
-                                        .primaryColor,
-                                    fontWeight: FontWeight.w300,
-                                    fontSize: 15),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    )),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: EdgeInsets.only(left: 35.0),
+                          child: Text(
+                            '50 - 60 minutos.',
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontWeight: FontWeight.w300,
+                                fontSize: 15),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )),
                 SizedBox(
                   height: 5.0,
                 ),
                 Container(
-                  height: 70.0,
+                  height: mainButtonHeight,
                   child: MaterialButton(
                     onPressed: () {
-                      print(MediaQuery.of(context).size.width);
-                      print(MediaQuery.of(context).size.height);
+                      // productInfoScreenController.addProductToCart(food: food);
+                      showDialog(context: context, builder: (context){
+                        return QuantityAlert(productInfoScreenController: productInfoScreenController, food: food);
+                      });
                     },
                     child: Text(
                       'Adicionar ao carrinho',
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
                     ),
                     shape: RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.circular(30.0)),
+                        borderRadius: BorderRadius.circular(30.0)),
                     textColor: Colors.white,
                     color: Theme.of(context).primaryColor,
                   ),
@@ -451,8 +462,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                     children: [
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        padding:
-                        EdgeInsets.symmetric(horizontal: 25),
+                        padding: EdgeInsets.symmetric(horizontal: 25),
                         alignment: Alignment.center,
                         child: Text(
                           food.type != 'Hambúrguer'
@@ -469,14 +479,12 @@ class ProductInfoScreenContent extends StatelessWidget {
                       ),
                       Container(
                         width: MediaQuery.of(context).size.width,
-                        padding:
-                        EdgeInsets.symmetric(horizontal: 25),
+                        padding: EdgeInsets.symmetric(horizontal: 25),
                         alignment: Alignment.center,
                         child: Text(
                           maskedMoney(food.price),
                           style: TextStyle(
-                              color:
-                              Theme.of(context).primaryColor,
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.w600,
                               fontSize: 20),
                         ),
@@ -485,106 +493,102 @@ class ProductInfoScreenContent extends StatelessWidget {
                   ),
                   Container(
                       child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(30.0)),
-                        elevation: 1,
-                        shadowColor: Colors.grey.withOpacity(0.5),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.food_bank_rounded,
-                                      size: 30,
-                                    ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Text(
-                                      'Ingredientes',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black),
-                                    ),
-                                  ],
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    elevation: 1,
+                    shadowColor: Colors.grey.withOpacity(0.5),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.food_bank_rounded,
+                                  size: 30,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                padding: EdgeInsets.only(left: 35.0),
-                                child: Text(
-                                  '${productInfoScreenController.ingredients(food.ingredients)}.',
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  'Ingredientes',
                                   style: TextStyle(
-                                      color: Theme.of(context)
-                                          .primaryColor,
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 17),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      )),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            padding: EdgeInsets.only(left: 35.0),
+                            child: Text(
+                              '${productInfoScreenController.ingredients(food.ingredients)}.',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 17),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )),
                   Container(
                       child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius:
-                            BorderRadius.circular(30.0)),
-                        elevation: 1,
-                        shadowColor: Colors.grey.withOpacity(0.5),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.timer_rounded,
-                                      size: 30.0,
-                                    ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Text(
-                                      'Tempo de entrega',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black),
-                                    ),
-                                  ],
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    elevation: 1,
+                    shadowColor: Colors.grey.withOpacity(0.5),
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            alignment: Alignment.topLeft,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.timer_rounded,
+                                  size: 30.0,
                                 ),
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                padding: EdgeInsets.only(left: 35.0),
-                                child: Text(
-                                  '50 - 60 minutos.',
+                                SizedBox(
+                                  width: 5.0,
+                                ),
+                                Text(
+                                  'Tempo de entrega',
                                   style: TextStyle(
-                                      color: Theme.of(context)
-                                          .primaryColor,
-                                      fontWeight: FontWeight.w300,
-                                      fontSize: 17),
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      )),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            padding: EdgeInsets.only(left: 35.0),
+                            child: Text(
+                              '50 - 60 minutos.',
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontWeight: FontWeight.w300,
+                                  fontSize: 17),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )),
                   SizedBox(
                     height: 5.0,
                   ),
@@ -592,18 +596,15 @@ class ProductInfoScreenContent extends StatelessWidget {
                     height: 70.0,
                     child: MaterialButton(
                       onPressed: () {
-                        print(MediaQuery.of(context).size.width);
-                        print(MediaQuery.of(context).size.height);
+                        productInfoScreenController.addProductToCart(food: food);
                       },
                       child: Text(
                         'Adicionar ao carrinho',
                         style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w600),
+                            fontSize: 17, fontWeight: FontWeight.w600),
                       ),
                       shape: RoundedRectangleBorder(
-                          borderRadius:
-                          BorderRadius.circular(30.0)),
+                          borderRadius: BorderRadius.circular(30.0)),
                       textColor: Colors.white,
                       color: Theme.of(context).primaryColor,
                     ),
