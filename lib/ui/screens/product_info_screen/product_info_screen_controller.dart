@@ -4,10 +4,13 @@ import 'package:delivery_app/data/models/product.dart';
 import 'package:delivery_app/ui/screens/cart_screen/cart_screen.dart';
 import 'package:delivery_app/ui/screens/cart_screen/cart_screen_controller.dart';
 import 'package:delivery_app/ui/screens/home_screen/home_screen.dart';
+import 'package:flutter/animation.dart';
 import 'package:get/get.dart';
 
 class ProductInfoScreenController extends GetxController {
   RxInt quantity = 1.obs;
+  AnimationController animationController;
+  Animation<double> scaleAnimation;
 
   String ingredients(List<String> ingredients) {
     return ingredients.reduce((value, element) => value + ', ' + element);
@@ -29,7 +32,7 @@ class ProductInfoScreenController extends GetxController {
     productItem['product'] = food ?? drink;
     productItem['quantity'] = quantity.value;
     _cartScreenController.products.add(productItem);
-    quantity.value = 1;
     Get.offAll(HomeScreen());
+    quantity.value = 1;
   }
 }

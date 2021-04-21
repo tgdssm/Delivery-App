@@ -228,9 +228,12 @@ class ProductInfoScreenContent extends StatelessWidget {
                           widthFactor: .85,
                           child: MaterialButton(
                             onPressed: () {
-                              showDialog(context: context, builder: (context){
-                                return QuantityAlert(productInfoScreenController: productInfoScreenController, food: food);
-                              });
+                              showDialog(context: context, builder: (context) {
+                                return QuantityAlert(
+                                    productInfoScreenController:
+                                    productInfoScreenController,
+                                    food: food);
+                              },);
                             },
                             child: Text(
                               'Adicionar ao carrinho',
@@ -415,10 +418,12 @@ class ProductInfoScreenContent extends StatelessWidget {
                   height: mainButtonHeight,
                   child: MaterialButton(
                     onPressed: () {
-                      // productInfoScreenController.addProductToCart(food: food);
-                      showDialog(context: context, builder: (context){
-                        return QuantityAlert(productInfoScreenController: productInfoScreenController, food: food);
-                      });
+                      showDialog(context: context, builder: (context) {
+                        return QuantityAlert(
+                            productInfoScreenController:
+                            productInfoScreenController,
+                            food: food);
+                      },);
                     },
                     child: Text(
                       'Adicionar ao carrinho',
@@ -596,7 +601,8 @@ class ProductInfoScreenContent extends StatelessWidget {
                     height: 70.0,
                     child: MaterialButton(
                       onPressed: () {
-                        productInfoScreenController.addProductToCart(food: food);
+                        productInfoScreenController.addProductToCart(
+                            food: food);
                       },
                       child: Text(
                         'Adicionar ao carrinho',
