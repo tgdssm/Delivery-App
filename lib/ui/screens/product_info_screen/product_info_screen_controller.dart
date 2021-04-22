@@ -1,16 +1,29 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/data/models/drink.dart';
 import 'package:delivery_app/data/models/food.dart';
 import 'package:delivery_app/data/models/product.dart';
 import 'package:delivery_app/ui/screens/cart_screen/cart_screen.dart';
 import 'package:delivery_app/ui/screens/cart_screen/cart_screen_controller.dart';
 import 'package:delivery_app/ui/screens/home_screen/home_screen.dart';
+import 'package:delivery_app/ui/screens/home_screen/home_screen_controller.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductInfoScreenController extends GetxController {
+class ProductInfoScreenController extends GetxController{
+  final _cartScreenController = Get.put(CartScreenController());
+  final _homeScreenController = Get.put(HomeScreenController());
   RxInt quantity = 1.obs;
+
+  String productSize;
+
   AnimationController animationController;
   Animation<double> scaleAnimation;
+
+  void selectProductSize(String size) {
+    productSize = size;
+    update(['productSize']);
+  }
 
   String ingredients(List<String> ingredients) {
     return ingredients.reduce((value, element) => value + ', ' + element);
@@ -26,13 +39,65 @@ class ProductInfoScreenController extends GetxController {
     }
   }
 
-  void addProductToCart({Food food, Drink drink}) {
-    final _cartScreenController = Get.put(CartScreenController());
+  SnackBar addProductToCart({Food food, Drink drink}) {
     Map<String, dynamic> productItem = {};
     productItem['product'] = food ?? drink;
     productItem['quantity'] = quantity.value;
-    _cartScreenController.products.add(productItem);
-    Get.offAll(HomeScreen());
-    quantity.value = 1;
+    productItem['size'] = productSize;
+    if (!checkInCart(productItem)) {
+      _cartScreenController.products.add(productItem);
+      _homeScreenController.selectedTab.value = 0;
+      Get.offAll(HomeScreen());
+      quantity.value = 1;
+      productSize = null;
+      final snackBar = SnackBar(
+        content: AutoSizeText(
+          'Produto adicionado ao carrinho',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          minFontSize: 15,
+        ),
+        backgroundColor: Colors.green,
+        duration: Duration(milliseconds: 600),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+        ),
+      );
+      return snackBar;
+    } else {
+      Get.back(result: true);
+      quantity.value = 1;
+      productSize = null;
+      final snackBar = SnackBar(
+        content: AutoSizeText(
+          'Este produto já está no carrinho',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          minFontSize: 15,
+        ),
+        backgroundColor: Colors.red,
+        duration: Duration(milliseconds: 600),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+        ),
+      );
+      return snackBar;
+    }
+  }
+
+  // Verifica se o produto ja existe dentro do carrinho
+  bool checkInCart(Map<String, dynamic> productItem) {
+    bool result = false;
+    _cartScreenController.products.forEach((element) {
+      if ((element['product'].name == productItem['product'].name) &&
+          element['size'] == productItem['size']) {
+        result = true;
+      } else {
+        result = false;
+      }
+    });
+    return result;
   }
 }

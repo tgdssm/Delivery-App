@@ -71,294 +71,296 @@ class _HomeScreenState extends State<HomeScreen>
                     ..rotateY((pi / 6) * value),
                   child: LayoutBuilder(
                     builder: (context, constraints) {
-                      return Scaffold(
-                        appBar: AppBar(
-                            backgroundColor: Colors.white54,
-                            elevation: 0.0,
-                            leading: IconButton(
-                              icon: Icon(Icons.menu_rounded),
-                              color: Colors.black,
-                              iconSize: 30.0,
-                              onPressed: () {
-                                _homeScreenController.tweenEndValue =
-                                    _homeScreenController.tweenEndValue == 0
-                                        ? 1
-                                        : 0;
-                              },
+                      return ScaffoldMessenger(
+                        child: Scaffold(
+                          appBar: AppBar(
+                              backgroundColor: Colors.white54,
+                              elevation: 0.0,
+                              leading: IconButton(
+                                icon: Icon(Icons.menu_rounded),
+                                color: Colors.black,
+                                iconSize: 30.0,
+                                onPressed: () {
+                                  _homeScreenController.tweenEndValue =
+                                      _homeScreenController.tweenEndValue == 0
+                                          ? 1
+                                          : 0;
+                                },
+                              ),
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Obx(() {
+                                    return _cartScreenController
+                                                .products.length <=
+                                            0
+                                        ? IconButton(
+                                            icon: Icon(
+                                                Icons.shopping_cart_outlined),
+                                            color: Colors.black,
+                                            iconSize: 30.0,
+                                            onPressed: () {
+                                              Get.to(CartScreen());
+                                            },
+                                          )
+                                        : Container(
+                                            child: Stack(
+                                              children: [
+                                                IconButton(
+                                                  icon: Icon(Icons
+                                                      .shopping_cart_outlined),
+                                                  color: Colors.black,
+                                                  iconSize: 30.0,
+                                                  onPressed: () {
+                                                    Get.to(CartScreen());
+                                                  },
+                                                ),
+                                                Positioned(
+                                                  bottom: 28.0,
+                                                  left: 17.0,
+                                                  child: Container(
+                                                    width: 15.0,
+                                                    height: 15.0,
+                                                    alignment: Alignment.center,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white,
+                                                        shape: BoxShape.circle),
+                                                    child: Text(
+                                                      '${_cartScreenController.products.length}',
+                                                      style: TextStyle(
+                                                          fontSize: 15,
+                                                          fontWeight: FontWeight.bold,
+                                                          color: Theme.of(context)
+                                                              .primaryColor),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          );
+                                  }),
+                                ],
+                              )),
+                          body: ConstrainedBox(
+                            constraints: BoxConstraints(
+                              maxWidth: maxWidthScreen,
                             ),
-                            title: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                Obx(() {
-                                  return _cartScreenController
-                                              .products.length <=
-                                          0
-                                      ? IconButton(
-                                          icon: Icon(
-                                              Icons.shopping_cart_outlined),
-                                          color: Colors.black,
-                                          iconSize: 30.0,
-                                          onPressed: () {
-                                            Get.to(CartScreen());
-                                          },
-                                        )
-                                      : Container(
-                                          child: Stack(
-                                            children: [
-                                              IconButton(
-                                                icon: Icon(Icons
-                                                    .shopping_cart_outlined),
-                                                color: Colors.black,
-                                                iconSize: 30.0,
-                                                onPressed: () {
-                                                  Get.to(CartScreen());
-                                                },
-                                              ),
-                                              Positioned(
-                                                bottom: 28.0,
-                                                left: 17.0,
-                                                child: Container(
-                                                  width: 15.0,
-                                                  height: 15.0,
-                                                  alignment: Alignment.center,
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      shape: BoxShape.circle),
+                            child: SafeArea(
+                                child: Container(
+                              padding: EdgeInsets.all(18.0),
+                              color: Colors.white54,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.topLeft,
+                                    child: FractionallySizedBox(
+                                      widthFactor: .75,
+                                      child: AutoSizeText(
+                                        'Comidas deliciosas para você',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 34.0),
+                                        maxLines: 2,
+                                        minFontSize: 20.0,
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    height: 60,
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                        color: Color(0xffEFEEEE)),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 25.0),
+                                      child: TextFormField(
+                                        decoration: InputDecoration(
+                                            prefixIcon: Icon(Icons.search),
+                                            hintText: 'Pesquisar',
+                                            enabledBorder: OutlineInputBorder(
+                                                borderSide: BorderSide.none),
+                                            border: OutlineInputBorder(
+                                                borderSide: BorderSide.none)),
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Center(
+                                      child: Obx(() => TabBar(
+                                              indicatorColor:
+                                                  Theme.of(context).primaryColor,
+                                              isScrollable: true,
+                                              onTap: (int selectedTab) {
+                                                _homeScreenController.selectedTab
+                                                    .value = selectedTab;
+                                              },
+                                              controller: _homeScreenController
+                                                  .tabController,
+                                              tabs: [
+                                                Tab(
                                                   child: Text(
-                                                    '${_cartScreenController.products.length}',
+                                                    'Pizzas',
                                                     style: TextStyle(
-                                                        fontSize: 15,
-                                                        fontWeight: FontWeight.bold,
-                                                        color: Theme.of(context)
-                                                            .primaryColor),
+                                                        color: _homeScreenController
+                                                                    .selectedTab
+                                                                    .value ==
+                                                                0
+                                                            ? Theme.of(context)
+                                                                .primaryColor
+                                                            : Colors.black,
+                                                        fontSize: 17.0,
+                                                        fontWeight:
+                                                            FontWeight.normal),
                                                   ),
                                                 ),
-                                              )
-                                            ],
-                                          ),
-                                        );
-                                }),
-                              ],
-                            )),
-                        body: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth: maxWidthScreen,
-                          ),
-                          child: SafeArea(
-                              child: Container(
-                            padding: EdgeInsets.all(18.0),
-                            color: Colors.white54,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Container(
-                                  alignment: Alignment.topLeft,
-                                  child: FractionallySizedBox(
-                                    widthFactor: .75,
-                                    child: AutoSizeText(
-                                      'Comidas deliciosas para você',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 34.0),
-                                      maxLines: 2,
-                                      minFontSize: 20.0,
+                                                Tab(
+                                                  child: Text(
+                                                    'Hambúrgueres',
+                                                    style: TextStyle(
+                                                        color: _homeScreenController
+                                                                    .selectedTab
+                                                                    .value ==
+                                                                1
+                                                            ? Theme.of(context)
+                                                                .primaryColor
+                                                            : Colors.black,
+                                                        fontSize: 17.0,
+                                                        fontWeight:
+                                                            FontWeight.normal),
+                                                  ),
+                                                ),
+                                                Tab(
+                                                  child: Text(
+                                                    'Regrigerantes',
+                                                    style: TextStyle(
+                                                        color: _homeScreenController
+                                                                    .selectedTab
+                                                                    .value ==
+                                                                2
+                                                            ? Theme.of(context)
+                                                                .primaryColor
+                                                            : Colors.black,
+                                                        fontSize: 17.0,
+                                                        fontWeight:
+                                                            FontWeight.normal),
+                                                  ),
+                                                ),
+                                              ])),
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  height: 60,
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      color: Color(0xffEFEEEE)),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 25.0),
-                                    child: TextFormField(
-                                      decoration: InputDecoration(
-                                          prefixIcon: Icon(Icons.search),
-                                          hintText: 'Pesquisar',
-                                          enabledBorder: OutlineInputBorder(
-                                              borderSide: BorderSide.none),
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide.none)),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  child: Center(
-                                    child: Obx(() => TabBar(
-                                            indicatorColor:
-                                                Theme.of(context).primaryColor,
-                                            isScrollable: true,
-                                            onTap: (int selectedTab) {
-                                              _homeScreenController.selectedTab
-                                                  .value = selectedTab;
-                                            },
-                                            controller: _homeScreenController
-                                                .tabController,
-                                            tabs: [
-                                              Tab(
-                                                child: Text(
-                                                  'Pizzas',
-                                                  style: TextStyle(
-                                                      color: _homeScreenController
-                                                                  .selectedTab
-                                                                  .value ==
-                                                              0
-                                                          ? Theme.of(context)
-                                                              .primaryColor
-                                                          : Colors.black,
-                                                      fontSize: 17.0,
-                                                      fontWeight:
-                                                          FontWeight.normal),
-                                                ),
-                                              ),
-                                              Tab(
-                                                child: Text(
-                                                  'Hambúrgueres',
-                                                  style: TextStyle(
-                                                      color: _homeScreenController
-                                                                  .selectedTab
-                                                                  .value ==
-                                                              1
-                                                          ? Theme.of(context)
-                                                              .primaryColor
-                                                          : Colors.black,
-                                                      fontSize: 17.0,
-                                                      fontWeight:
-                                                          FontWeight.normal),
-                                                ),
-                                              ),
-                                              Tab(
-                                                child: Text(
-                                                  'Regrigerantes',
-                                                  style: TextStyle(
-                                                      color: _homeScreenController
-                                                                  .selectedTab
-                                                                  .value ==
-                                                              2
-                                                          ? Theme.of(context)
-                                                              .primaryColor
-                                                          : Colors.black,
-                                                      fontSize: 17.0,
-                                                      fontWeight:
-                                                          FontWeight.normal),
-                                                ),
-                                              ),
-                                            ])),
-                                  ),
-                                ),
-                                Flexible(
-                                  child: SingleChildScrollView(
-                                    child: ConstrainedBox(
-                                      constraints: BoxConstraints(
-                                        maxHeight: constraints.maxHeight,
-                                      ),
-                                      child: LayoutBuilder(
-                                        builder: (context, constraints) {
-                                          print(constraints.maxHeight);
-                                          if (constraints.maxHeight <=
-                                              mobileBreakPointSmallHeight) {
+                                  Flexible(
+                                    child: SingleChildScrollView(
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                          maxHeight: constraints.maxHeight,
+                                        ),
+                                        child: LayoutBuilder(
+                                          builder: (context, constraints) {
+                                            print(constraints.maxHeight);
+                                            if (constraints.maxHeight <=
+                                                mobileBreakPointSmallHeight) {
+                                              return Container(
+                                                height: 200,
+                                                width: constraints.maxWidth,
+                                                child: TabBarView(
+                                                    controller:
+                                                        _homeScreenController
+                                                            .tabController,
+                                                    children: [
+                                                      ListViewProducts(
+                                                        foods: pizzas,
+                                                      ),
+                                                      ListViewProducts(
+                                                        foods: hamburgers,
+                                                      ),
+                                                      ListViewProducts(
+                                                        drinks: softDrinks,
+                                                      )
+                                                    ]),
+                                              );
+                                            }
+                                            if (constraints.maxHeight <=
+                                                mobileBreakPointMediumHeight) {
+                                              return Container(
+                                                height: 320,
+                                                width: constraints.maxWidth,
+                                                child: TabBarView(
+                                                    controller:
+                                                        _homeScreenController
+                                                            .tabController,
+                                                    children: [
+                                                      ListViewProducts(
+                                                        foods: pizzas,
+                                                      ),
+                                                      ListViewProducts(
+                                                        foods: hamburgers,
+                                                      ),
+                                                      ListViewProducts(
+                                                        drinks: softDrinks,
+                                                      )
+                                                    ]),
+                                              );
+                                            }
                                             return Container(
-                                              height: 200,
-                                              width: constraints.maxWidth,
-                                              child: TabBarView(
-                                                  controller:
-                                                      _homeScreenController
-                                                          .tabController,
-                                                  children: [
-                                                    ListViewProducts(
-                                                      foods: pizzas,
-                                                    ),
-                                                    ListViewProducts(
-                                                      foods: hamburgers,
-                                                    ),
-                                                    ListViewProducts(
-                                                      drinks: softDrinks,
-                                                    )
-                                                  ]),
+                                              child: Text('deu ruim'),
                                             );
-                                          }
-                                          if (constraints.maxHeight <=
-                                              mobileBreakPointMediumHeight) {
-                                            return Container(
-                                              height: 320,
-                                              width: constraints.maxWidth,
-                                              child: TabBarView(
-                                                  controller:
-                                                      _homeScreenController
-                                                          .tabController,
-                                                  children: [
-                                                    ListViewProducts(
-                                                      foods: pizzas,
-                                                    ),
-                                                    ListViewProducts(
-                                                      foods: hamburgers,
-                                                    ),
-                                                    ListViewProducts(
-                                                      drinks: softDrinks,
-                                                    )
-                                                  ]),
-                                            );
-                                          }
-                                          return Container(
-                                            child: Text('deu ruim'),
-                                          );
-                                        },
+                                          },
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                )
+                                  )
 
-                                // Flexible(
-                                //   child: SingleChildScrollView(
-                                //     child: Container(
-                                //       height: 320,
-                                //       width: double.infinity,
-                                //       child: TabBarView(
-                                //           controller:
-                                //               _homeScreenController.tabController,
-                                //           children: [
-                                //             ListViewProducts(
-                                //               foods: pizzas,
-                                //             ),
-                                //             ListViewProducts(
-                                //               foods: hamburgers,
-                                //             ),
-                                //             ListViewProducts(
-                                //               drinks: softDrinks,
-                                //             )
-                                //           ]),
-                                //     ),
-                                //   ),
-                                // )
-                              ],
-                            ),
-                          )),
-                        ),
-                        bottomNavigationBar: BottomNavigationBar(
-                          elevation: 0,
-                          backgroundColor: Colors.white54,
-                          items: [
-                            BottomNavigationBarItem(
-                                icon: Icon(
-                                  Icons.home_rounded,
-                                  size: 35,
-                                ),
-                                label: ''),
-                            BottomNavigationBarItem(
-                                icon: Icon(
-                                  Icons.favorite_border_rounded,
-                                  size: 35,
-                                ),
-                                label: ''),
-                            BottomNavigationBarItem(
-                                icon: Icon(
-                                  Icons.person_outline_rounded,
-                                  size: 35,
-                                ),
-                                label: ''),
-                          ],
+                                  // Flexible(
+                                  //   child: SingleChildScrollView(
+                                  //     child: Container(
+                                  //       height: 320,
+                                  //       width: double.infinity,
+                                  //       child: TabBarView(
+                                  //           controller:
+                                  //               _homeScreenController.tabController,
+                                  //           children: [
+                                  //             ListViewProducts(
+                                  //               foods: pizzas,
+                                  //             ),
+                                  //             ListViewProducts(
+                                  //               foods: hamburgers,
+                                  //             ),
+                                  //             ListViewProducts(
+                                  //               drinks: softDrinks,
+                                  //             )
+                                  //           ]),
+                                  //     ),
+                                  //   ),
+                                  // )
+                                ],
+                              ),
+                            )),
+                          ),
+                          bottomNavigationBar: BottomNavigationBar(
+                            elevation: 0,
+                            backgroundColor: Colors.white54,
+                            items: [
+                              BottomNavigationBarItem(
+                                  icon: Icon(
+                                    Icons.home_rounded,
+                                    size: 35,
+                                  ),
+                                  label: ''),
+                              BottomNavigationBarItem(
+                                  icon: Icon(
+                                    Icons.favorite_border_rounded,
+                                    size: 35,
+                                  ),
+                                  label: ''),
+                              BottomNavigationBarItem(
+                                  icon: Icon(
+                                    Icons.person_outline_rounded,
+                                    size: 35,
+                                  ),
+                                  label: ''),
+                            ],
+                          ),
                         ),
                       );
                     },
