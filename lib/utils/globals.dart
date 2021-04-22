@@ -70,31 +70,37 @@ final hamburgers = [
 
 final softDrinks = [
   Drink(
-    photo: 'assets/images/soda_screen/coca_cola_2_litros.png',
+    photo: 'assets/images/soda_screen/logo_coca_cola.png',
     name: 'Coca Cola',
     price: 44.99,
+    type: 'Refrigerante',
   ),
   Drink(
-    photo: 'assets/images/soda_screen/fanta_uva_2_litros.png',
-    name: 'Fanta Uva',
+    photo: 'assets/images/soda_screen/logo_fanta.png',
+    name: 'Fanta',
     price: 44.99,
+    type: 'Refrigerante',
   ),
   Drink(
-    photo: 'assets/images/soda_screen/guarana_antartica_2_litros.png',
+    photo: 'assets/images/soda_screen/logo_guarana_antarctica.png',
     name: 'Guaraná Antarctica',
     price: 44.99,
+    type: 'Refrigerante',
   ),
   Drink(
-    photo: 'assets/images/soda_screen/kuat_2_litros.png',
+    photo: 'assets/images/soda_screen/logo_kuat.png',
     name: 'Kuat',
     price: 44.99,
+    type: 'Refrigerante',
   ),
   Drink(
-    photo: 'assets/images/soda_screen/sukita_laranja_2_litros.png',
-    name: 'Sukita Laranja',
+    photo: 'assets/images/soda_screen/logo_sprite.png',
+    name: 'Sprite',
     price: 44.99,
+    type: 'Refrigerante',
   ),
 ];
+
 String maskedMoney(double money) {
   final maskedController = MoneyMaskedTextController(
       precision: 2, decimalSeparator: ',', leftSymbol: 'R\$ ');

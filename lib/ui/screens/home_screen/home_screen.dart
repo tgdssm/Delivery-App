@@ -232,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen>
                                                 ),
                                                 Tab(
                                                   child: Text(
-                                                    'Regrigerantes',
+                                                    'Refrigerantes',
                                                     style: TextStyle(
                                                         color: _homeScreenController
                                                                     .selectedTab

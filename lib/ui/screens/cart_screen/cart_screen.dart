@@ -7,9 +7,11 @@ class CartScreen extends StatelessWidget {
   final _cartScreenController = Get.put(CartScreenController());
   @override
   Widget build(BuildContext context) {
-    print(_cartScreenController.products[2]['product'].name);
-    print(_cartScreenController.products[2]['quantity']);
-
+    _cartScreenController.products.forEach((element) {
+      print(element['product'].name);
+      print(element['size']);
+      print(element['quantity']);
+    });
     return LayoutBuilder(
       builder: (context, constraints) {
         return Scaffold(

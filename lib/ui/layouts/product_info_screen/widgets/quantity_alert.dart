@@ -41,13 +41,20 @@ class _QuantityAlertState extends State<QuantityAlert>
           scale: widget.productInfoScreenController.scaleAnimation,
           child: FractionallySizedBox(
             widthFactor: .75,
-            heightFactor: (widget.food.type == 'Pizza')
+            // Verifica se drink != null para que se for falso, a tela possa se
+            // adaptar ao tamanho necessario para comportar o menu de tamanhos se
+            // food for do tipo Pizza,
+            heightFactor: ((widget.drink != null)
                 ? constraints.maxHeight <= mobileBreakPointSmallHeight
-                    ? .45
-                    : .36
-                : constraints.maxHeight <= mobileBreakPointSmallHeight
-                    ? .35
-                    : .25,
+                    ? .63
+                    : .53
+                : (widget.food.type == 'Pizza')
+                    ? (constraints.maxHeight <= mobileBreakPointSmallHeight
+                        ? .47
+                        : .40)
+                    : (constraints.maxHeight <= mobileBreakPointSmallHeight
+                        ? .35
+                        : .25)),
             child: Container(
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -57,8 +64,59 @@ class _QuantityAlertState extends State<QuantityAlert>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  widget.food.type == 'Pizza'
-                      ? Container(
+                  // Se drink for nulo verifica o tipo de food
+                  // Se for Pizza, abre o menu de tamanhos, se não, mostra a tela padrão
+                  // Se drink for diferente de nulo,  abre o menu de tamanhos
+                  widget.drink == null
+                      ? (widget.food.type == 'Pizza')
+                          ? Container(
+                              child: Column(
+                                children: [
+                                  Container(
+                                    child: AutoSizeText(
+                                      'Escolha o tamanho',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 25),
+                                      maxLines: 1,
+                                      minFontSize: 18,
+                                    ),
+                                  ),
+                                  Container(
+                                    alignment: Alignment.center,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        CheckBoxProductSize(
+                                          productInfoScreenController: widget
+                                              .productInfoScreenController,
+                                          size: 'P',
+                                        ),
+                                        CheckBoxProductSize(
+                                          productInfoScreenController: widget
+                                              .productInfoScreenController,
+                                          size: 'M',
+                                        ),
+                                        CheckBoxProductSize(
+                                          productInfoScreenController: widget
+                                              .productInfoScreenController,
+                                          size: 'G',
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Container(
+                                    child: Divider(
+                                      color: Colors.black,
+                                      height: 2.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )
+                          : Container()
+                      : Container(
                           child: Column(
                             children: [
                               Container(
@@ -73,32 +131,37 @@ class _QuantityAlertState extends State<QuantityAlert>
                               ),
                               Container(
                                 alignment: Alignment.center,
-                                child: Row(
+                                child: Column(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     CheckBoxProductSize(
                                       productInfoScreenController:
                                           widget.productInfoScreenController,
-                                      size: 'P',
+                                      size: '350ml',
                                     ),
                                     CheckBoxProductSize(
                                       productInfoScreenController:
                                           widget.productInfoScreenController,
-                                      size: 'M',
+                                      size: '1L',
                                     ),
                                     CheckBoxProductSize(
                                       productInfoScreenController:
                                           widget.productInfoScreenController,
-                                      size: 'G',
+                                      size: '2L',
                                     ),
                                   ],
                                 ),
-                              )
+                              ),
+                              Container(
+                                child: Divider(
+                                  color: Colors.black,
+                                  height: 2.0,
+                                ),
+                              ),
                             ],
                           ),
-                        )
-                      : Container(),
+                        ),
                   Container(
                     child: AutoSizeText(
                       'Escolha a quantidade',
@@ -107,9 +170,6 @@ class _QuantityAlertState extends State<QuantityAlert>
                       maxLines: 1,
                       minFontSize: 18,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10.0,
                   ),
                   Container(
                     child: Row(
@@ -165,17 +225,11 @@ class _QuantityAlertState extends State<QuantityAlert>
                       ],
                     ),
                   ),
-                  SizedBox(
-                    height: 8.0,
-                  ),
                   Container(
                     child: Divider(
                       color: Colors.black,
                       height: 2.0,
                     ),
-                  ),
-                  SizedBox(
-                    height: 8.0,
                   ),
                   Container(
                     child: Row(

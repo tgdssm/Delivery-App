@@ -1,8 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/data/models/drink.dart';
 import 'package:delivery_app/data/models/food.dart';
-import 'package:delivery_app/data/models/product.dart';
-import 'package:delivery_app/ui/screens/cart_screen/cart_screen.dart';
 import 'package:delivery_app/ui/screens/cart_screen/cart_screen_controller.dart';
 import 'package:delivery_app/ui/screens/home_screen/home_screen.dart';
 import 'package:delivery_app/ui/screens/home_screen/home_screen_controller.dart';
@@ -44,6 +42,25 @@ class ProductInfoScreenController extends GetxController{
     productItem['product'] = food ?? drink;
     productItem['quantity'] = quantity.value;
     productItem['size'] = productSize;
+
+    if((productItem['size'] == null && productItem['product'].type == 'Pizza')||
+        productItem['size'] == null && productItem['product'].type == 'Refrigerante'){
+      final snackBar = SnackBar(
+        content: AutoSizeText(
+          'Selecione um tamanho',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          textAlign: TextAlign.center,
+          maxLines: 1,
+          minFontSize: 15,
+        ),
+        backgroundColor: Colors.deepOrange,
+        duration: Duration(milliseconds: 600),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+        ),
+      );
+      return snackBar;
+    }
     if (!checkInCart(productItem)) {
       _cartScreenController.products.add(productItem);
       _homeScreenController.selectedTab.value = 0;

@@ -29,7 +29,7 @@ class CheckBoxProductSize extends StatelessWidget {
               size,
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               maxLines: 1,
-              minFontSize: 15,
+              minFontSize: 12,
             ),
           ),
         ],

@@ -7,6 +7,7 @@ class Drink extends Product {
     String name,
     String photo,
     double price,
+    String type,
     this.liter,
-  }) : super(name: name, photo: photo, price: price);
+  }) : super(name: name, photo: photo, price: price, type: type);
 }

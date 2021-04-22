@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/data/models/drink.dart';
 import 'package:delivery_app/data/models/food.dart';
 import 'package:delivery_app/ui/layouts/product_info_screen/product_info_screen_content.dart';
@@ -43,8 +42,7 @@ class ProductInfoScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-          body: food != null
-              ? ConstrainedBox(
+          body: ConstrainedBox(
                   constraints: BoxConstraints(maxWidth: maxWidthScreen),
                   child: SafeArea(
                       child: ConstrainedBox(
@@ -58,7 +56,6 @@ class ProductInfoScreen extends StatelessWidget {
                     ),
                   )),
                 )
-              : Container(),
         );
       },
     );
