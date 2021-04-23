@@ -5,31 +5,31 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 final pizzas = [
   Food(
       photo: 'assets/images/pizzas_screen/calabresa.png',
-      name: 'Calabresa',
+      name: 'Pizza de Calabresa',
       type: 'Pizza',
       price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela', 'Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela', ]),
   Food(
       photo: 'assets/images/pizzas_screen/cogumelo.png',
-      name: 'Cogumelo',
+      name: 'Pizza de Cogumelo',
       type: 'Pizza',
       price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela']),
   Food(
       photo: 'assets/images/pizzas_screen/cogumelo_linguica_tomate.png',
-      name: 'Cogumelo & Linguiça',
+      name: 'Pizza de Cogumelo & Linguiça',
       type: 'Pizza',
       price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela']),
   Food(
       photo: 'assets/images/pizzas_screen/frango_catupiry.png',
-      name: 'Frango & Catupiry',
+      name: 'Pizza de Frango & Catupiry',
       type: 'Pizza',
       price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela']),
   Food(
       photo: 'assets/images/pizzas_screen/lombo_canadense.png',
-      name: 'Lombo Canadense',
+      name: 'Pizza de Lombo Canadense',
       type: 'Pizza',
       price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela']),
@@ -117,3 +117,6 @@ const maxWidthScreen = 1024.0;
 // BreakPoints
 const mobileBreakPointSmallHeight = 570.0;
 const mobileBreakPointMediumHeight = 900.0;
+
+const mobileBreakPointSmallWidth = 300;
+const mobileBreakPointMediumWidth = 400;

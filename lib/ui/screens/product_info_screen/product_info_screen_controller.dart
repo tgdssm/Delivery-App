@@ -43,6 +43,7 @@ class ProductInfoScreenController extends GetxController{
     productItem['quantity'] = quantity.value;
     productItem['size'] = productSize;
 
+    // Verifica se o usuario escolheu o tamanho do produto
     if((productItem['size'] == null && productItem['product'].type == 'Pizza')||
         productItem['size'] == null && productItem['product'].type == 'Refrigerante'){
       final snackBar = SnackBar(
@@ -61,6 +62,8 @@ class ProductInfoScreenController extends GetxController{
       );
       return snackBar;
     }
+
+    // ProductItem sera adicionado ao carrinho
     if (!checkInCart(productItem)) {
       _cartScreenController.products.add(productItem);
       _homeScreenController.selectedTab.value = 0;
@@ -106,15 +109,11 @@ class ProductInfoScreenController extends GetxController{
 
   // Verifica se o produto ja existe dentro do carrinho
   bool checkInCart(Map<String, dynamic> productItem) {
-    bool result = false;
-    _cartScreenController.products.forEach((element) {
+    for(Map element in _cartScreenController.products){
       if ((element['product'].name == productItem['product'].name) &&
-          element['size'] == productItem['size']) {
-        result = true;
-      } else {
-        result = false;
+              (element['size'] == productItem['size'])){
+        return true;
       }
-    });
-    return result;
+    } return false;
   }
 }

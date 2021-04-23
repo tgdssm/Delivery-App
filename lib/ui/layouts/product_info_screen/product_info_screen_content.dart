@@ -83,9 +83,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(horizontal: 25),
                                   alignment: Alignment.center,
                                   child: AutoSizeText(
-                                    food.type != 'Hambúrguer'
-                                        ? '${food.type} de ${food.name}'
-                                        : food.name,
+                                    food.name,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
@@ -482,9 +480,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 25),
                             alignment: Alignment.center,
                             child: AutoSizeText(
-                              food.type != 'Hambúrguer'
-                                  ? '${food.type} de ${food.name}'
-                                  : food.name,
+                              food.name,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,

@@ -48,7 +48,7 @@ class ListViewProducts extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Container(
-                                  margin: EdgeInsets.only(top: 30.0),
+                                  margin: EdgeInsets.only(top: 50.0),
                                   width: 100,
                                   child: AutoSizeText(
                                     foods[index].name,
@@ -56,8 +56,9 @@ class ListViewProducts extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
                                     ),
-                                    minFontSize: 15,
+                                    minFontSize: 18,
                                     maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
                                     textAlign: TextAlign.center,
                                     // overflow: TextOverflow.ellipsis,
                                   )),
@@ -222,7 +223,9 @@ class ListViewProducts extends StatelessWidget {
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                     ),
+                                    maxLines: 2,
                                     textAlign: TextAlign.center,
+                                    overflow: TextOverflow.ellipsis,
                                     // overflow: TextOverflow.ellipsis,
                                   )),
                               Container(

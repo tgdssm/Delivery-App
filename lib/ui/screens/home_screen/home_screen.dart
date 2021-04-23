@@ -257,7 +257,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         ),
                                         child: LayoutBuilder(
                                           builder: (context, constraints) {
-                                            print(constraints.maxHeight);
+                                            print(constraints.maxWidth);
                                             if (constraints.maxHeight <=
                                                 mobileBreakPointSmallHeight) {
                                               return Container(
