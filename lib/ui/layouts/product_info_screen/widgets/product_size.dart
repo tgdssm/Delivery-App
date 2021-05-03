@@ -1,15 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/ui/screens/product_info_screen/product_info_screen_controller.dart';
+import 'package:delivery_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CheckBoxProductSize extends StatelessWidget {
   final ProductInfoScreenController productInfoScreenController;
-  final String size;
-  CheckBoxProductSize({this.productInfoScreenController, this.size});
+  final Map<String, dynamic> sizeAndPrice;
+  CheckBoxProductSize({this.productInfoScreenController, this.sizeAndPrice});
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: double.infinity,
       child: Row(
         children: [
           Material(
@@ -18,15 +20,15 @@ class CheckBoxProductSize extends StatelessWidget {
             id: 'productSize',
             builder: (controller) => Radio(
                 activeColor: Theme.of(context).primaryColor,
-                value: size,
-                groupValue: productInfoScreenController.productSize,
+                value: sizeAndPrice,
+                groupValue: productInfoScreenController.sizeAndPrice,
                 onChanged: (value) {
-                  productInfoScreenController.selectProductSize(value);
+                  productInfoScreenController.selectProductSizeAndPrice(value);
                 }),
           )),
           Container(
             child: AutoSizeText(
-              size,
+              '${sizeAndPrice['size']} - ${maskedMoney(sizeAndPrice['price']).toString()}',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               maxLines: 1,
               minFontSize: 12,

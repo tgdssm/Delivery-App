@@ -120,7 +120,7 @@ class CartScreen extends StatelessWidget {
                                                           children: [
                                                             Container(
                                                               child: AutoSizeText(
-                                                                '${item['product'].name}',
+                                                                '${item['product'].name} - ${item['size']}',
                                                                 style: TextStyle(
                                                                     fontSize: 15.0,
                                                                     fontWeight:
@@ -270,7 +270,7 @@ class CartScreen extends StatelessWidget {
                                                         children: [
                                                           Container(
                                                             child: AutoSizeText(
-                                                              '${item['product'].name}',
+                                                              '${item['product'].name} - ${item['size']}',
                                                               style: TextStyle(
                                                                   fontSize: 20.0,
                                                                   fontWeight:

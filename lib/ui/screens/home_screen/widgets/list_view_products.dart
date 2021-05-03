@@ -62,17 +62,6 @@ class ListViewProducts extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                     // overflow: TextOverflow.ellipsis,
                                   )),
-                              Container(
-                                  padding: EdgeInsets.only(top: 10.0),
-                                  width: 100,
-                                  child: Text(
-                                    '${maskedMoney(foods[index].price)}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: 17),
-                                    textAlign: TextAlign.center,
-                                  )),
                             ],
                           ),
                         ),
@@ -142,17 +131,6 @@ class ListViewProducts extends StatelessWidget {
                                     maxLines: 2,
                                     textAlign: TextAlign.center,
                                     // overflow: TextOverflow.ellipsis,
-                                  )),
-                              Container(
-                                  padding: EdgeInsets.only(top: 10.0),
-                                  width: 100,
-                                  child: Text(
-                                    '${maskedMoney(drinks[index].price)}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: 17),
-                                    textAlign: TextAlign.center,
                                   )),
                             ],
                           ),
@@ -228,17 +206,6 @@ class ListViewProducts extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     // overflow: TextOverflow.ellipsis,
                                   )),
-                              Container(
-                                  padding: EdgeInsets.only(top: 10.0),
-                                  width: 100,
-                                  child: Text(
-                                    '${maskedMoney(foods[index].price)}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: 17),
-                                    textAlign: TextAlign.center,
-                                  )),
                             ],
                           ),
                         ),
@@ -307,17 +274,6 @@ class ListViewProducts extends StatelessWidget {
                                     ),
                                     textAlign: TextAlign.center,
                                     // overflow: TextOverflow.ellipsis,
-                                  )),
-                              Container(
-                                  padding: EdgeInsets.only(top: 10.0),
-                                  width: 100,
-                                  child: Text(
-                                    '${maskedMoney(drinks[index].price)}',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: Theme.of(context).primaryColor,
-                                        fontSize: 17),
-                                    textAlign: TextAlign.center,
                                   )),
                             ],
                           ),

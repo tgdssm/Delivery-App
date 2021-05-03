@@ -96,18 +96,6 @@ class ProductInfoScreenContent extends StatelessWidget {
                                 SizedBox(
                                   height: 10.0,
                                 ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 25),
-                                  alignment: Alignment.center,
-                                  child: AutoSizeText(
-                                    maskedMoney(food.price),
-                                    style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18),
-                                    maxFontSize: 20,
-                                  ),
-                                ),
                               ],
                             ),
                             Container(
@@ -300,18 +288,6 @@ class ProductInfoScreenContent extends StatelessWidget {
                                 SizedBox(
                                   height: 10.0,
                                 ),
-                                Container(
-                                  padding: EdgeInsets.symmetric(horizontal: 25),
-                                  alignment: Alignment.center,
-                                  child: AutoSizeText(
-                                    maskedMoney(drink.price),
-                                    style: TextStyle(
-                                        color: Theme.of(context).primaryColor,
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 18),
-                                    maxFontSize: 20,
-                                  ),
-                                ),
                               ],
                             ),
                             Container(
@@ -493,18 +469,6 @@ class ProductInfoScreenContent extends StatelessWidget {
                           SizedBox(
                             height: 5.0,
                           ),
-                          Container(
-                            width: constraints.maxWidth,
-                            padding: EdgeInsets.symmetric(horizontal: 25),
-                            alignment: Alignment.center,
-                            child: Text(
-                              maskedMoney(food.price),
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20),
-                            ),
-                          ),
                         ],
                       ),
                       Container(
@@ -679,58 +643,8 @@ class ProductInfoScreenContent extends StatelessWidget {
                           SizedBox(
                             height: 5.0,
                           ),
-                          Container(
-                            width: constraints.maxWidth,
-                            padding: EdgeInsets.symmetric(horizontal: 25),
-                            alignment: Alignment.center,
-                            child: Text(
-                              maskedMoney(drink.price),
-                              style: TextStyle(
-                                  color: Theme.of(context).primaryColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 20),
-                            ),
-                          ),
                         ],
                       ),
-                      Container(
-                          child: Card(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0)),
-                        elevation: 1,
-                        shadowColor: Colors.grey.withOpacity(0.5),
-                        child: Padding(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.topLeft,
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.food_bank_rounded,
-                                      size: 30,
-                                    ),
-                                    SizedBox(
-                                      width: 5.0,
-                                    ),
-                                    Text(
-                                      'Ingredientes',
-                                      style: TextStyle(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.black),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                      )),
                       Container(
                           child: Card(
                         shape: RoundedRectangleBorder(

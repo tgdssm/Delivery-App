@@ -13,13 +13,13 @@ class ProductInfoScreenController extends GetxController{
   final _homeScreenController = Get.put(HomeScreenController());
   RxInt quantity = 1.obs;
 
-  String productSize;
+  Map<String, dynamic> sizeAndPrice;
 
   AnimationController animationController;
   Animation<double> scaleAnimation;
 
-  void selectProductSize(String size) {
-    productSize = size;
+  void selectProductSizeAndPrice(Map<String, dynamic> sizeAndPrice) {
+    this.sizeAndPrice = sizeAndPrice;
     update(['productSize']);
   }
 
@@ -39,13 +39,19 @@ class ProductInfoScreenController extends GetxController{
 
   SnackBar addProductToCart({Food food, Drink drink}) {
     Map<String, dynamic> productItem = {};
+    if(drink != null && sizeAndPrice != null){
+      drink.price = sizeAndPrice['price'];
+      productItem['size'] = sizeAndPrice['size'];
+    }else if(food != null && food.type != 'Hambúrguer' && sizeAndPrice != null){
+      food.price = sizeAndPrice['price'];
+      productItem['size'] = sizeAndPrice['size'];
+    }
     productItem['product'] = food ?? drink;
     productItem['quantity'] = quantity.value;
-    productItem['size'] = productSize;
 
     // Verifica se o usuario escolheu o tamanho do produto
-    if((productItem['size'] == null && productItem['product'].type == 'Pizza')||
-        productItem['size'] == null && productItem['product'].type == 'Refrigerante'){
+    if((productItem['size'] == null && productItem['price'] == null)
+        && productItem['product'].type != 'Hambúrguer'){
       final snackBar = SnackBar(
         content: AutoSizeText(
           'Selecione um tamanho',
@@ -69,7 +75,7 @@ class ProductInfoScreenController extends GetxController{
       _homeScreenController.selectedTab.value = 0;
       Get.offAll(HomeScreen());
       quantity.value = 1;
-      productSize = null;
+      sizeAndPrice = null;
       final snackBar = SnackBar(
         content: AutoSizeText(
           'Produto adicionado ao carrinho',
@@ -88,7 +94,7 @@ class ProductInfoScreenController extends GetxController{
     } else {
       Get.back(result: true);
       quantity.value = 1;
-      productSize = null;
+      sizeAndPrice = null;
       final snackBar = SnackBar(
         content: AutoSizeText(
           'Este produto já está no carrinho',

@@ -44,17 +44,13 @@ class _QuantityAlertState extends State<QuantityAlert>
             // Verifica se drink != null para que se for falso, a tela possa se
             // adaptar ao tamanho necessario para comportar o menu de tamanhos se
             // food for do tipo Pizza,
-            heightFactor: ((widget.drink != null)
+            heightFactor: ((widget.drink != null || widget.food.type != 'Hambúrguer')
                 ? constraints.maxHeight <= mobileBreakPointSmallHeight
                     ? .63
                     : .53
-                : (widget.food.type == 'Pizza')
-                    ? (constraints.maxHeight <= mobileBreakPointSmallHeight
-                        ? .47
-                        : .40)
-                    : (constraints.maxHeight <= mobileBreakPointSmallHeight
-                        ? .35
-                        : .25)),
+                : (constraints.maxHeight <= mobileBreakPointSmallHeight
+                    ? .40
+                    : .35)),
             child: Container(
               decoration: BoxDecoration(
                   color: Colors.white,
@@ -84,24 +80,33 @@ class _QuantityAlertState extends State<QuantityAlert>
                                   ),
                                   Container(
                                     alignment: Alignment.center,
-                                    child: Row(
+                                    child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         CheckBoxProductSize(
                                           productInfoScreenController: widget
                                               .productInfoScreenController,
-                                          size: 'P',
+                                          sizeAndPrice: {
+                                            'size': 'P',
+                                            'price': 25.0
+                                          },
                                         ),
                                         CheckBoxProductSize(
                                           productInfoScreenController: widget
                                               .productInfoScreenController,
-                                          size: 'M',
+                                          sizeAndPrice: {
+                                            'size': 'M',
+                                            'price': 35.0
+                                          },
                                         ),
                                         CheckBoxProductSize(
                                           productInfoScreenController: widget
                                               .productInfoScreenController,
-                                          size: 'G',
+                                          sizeAndPrice: {
+                                            'size': 'G',
+                                            'price': 45.0
+                                          },
                                         ),
                                       ],
                                     ),
@@ -115,7 +120,41 @@ class _QuantityAlertState extends State<QuantityAlert>
                                 ],
                               ),
                             )
-                          : Container()
+                          : Container(
+                    child: Column(
+                      children: [
+                        Container(
+                          child: AutoSizeText(
+                            'Preço',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 25),
+                            maxLines: 1,
+                            minFontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 5.0,),
+                        Container(
+                          alignment: Alignment.center,
+                          child: AutoSizeText(
+                            maskedMoney(widget.food.price),
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 20),
+                            maxLines: 1,
+                            minFontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 10.0,),
+                        Container(
+                          child: Divider(
+                            color: Colors.black,
+                            height: 2.0,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                       : Container(
                           child: Column(
                             children: [
@@ -138,17 +177,26 @@ class _QuantityAlertState extends State<QuantityAlert>
                                     CheckBoxProductSize(
                                       productInfoScreenController:
                                           widget.productInfoScreenController,
-                                      size: '350ml',
+                                      sizeAndPrice: {
+                                        'size': '350ml',
+                                        'price': 2.0
+                                      },
                                     ),
                                     CheckBoxProductSize(
                                       productInfoScreenController:
                                           widget.productInfoScreenController,
-                                      size: '1L',
+                                      sizeAndPrice: {
+                                        'size': '1L',
+                                        'price': 7.0
+                                      },
                                     ),
                                     CheckBoxProductSize(
                                       productInfoScreenController:
                                           widget.productInfoScreenController,
-                                      size: '2L',
+                                      sizeAndPrice: {
+                                        'size': '2L',
+                                        'price': 10.0
+                                      },
                                     ),
                                   ],
                                 ),

@@ -7,31 +7,26 @@ final pizzas = [
       photo: 'assets/images/pizzas_screen/calabresa.png',
       name: 'Pizza de Calabresa',
       type: 'Pizza',
-      price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela', 'Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela', ]),
   Food(
       photo: 'assets/images/pizzas_screen/cogumelo.png',
       name: 'Pizza de Cogumelo',
       type: 'Pizza',
-      price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela']),
   Food(
       photo: 'assets/images/pizzas_screen/cogumelo_linguica_tomate.png',
       name: 'Pizza de Cogumelo & Linguiça',
       type: 'Pizza',
-      price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela']),
   Food(
       photo: 'assets/images/pizzas_screen/frango_catupiry.png',
       name: 'Pizza de Frango & Catupiry',
       type: 'Pizza',
-      price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela']),
   Food(
       photo: 'assets/images/pizzas_screen/lombo_canadense.png',
       name: 'Pizza de Lombo Canadense',
       type: 'Pizza',
-      price: 44.99,
       ingredients: ['Molho de tomate', 'Oregano', 'Calabresa', 'Mussarela']),
 ];
 
@@ -72,31 +67,26 @@ final softDrinks = [
   Drink(
     photo: 'assets/images/soda_screen/logo_coca_cola.png',
     name: 'Coca Cola',
-    price: 44.99,
     type: 'Refrigerante',
   ),
   Drink(
     photo: 'assets/images/soda_screen/logo_fanta.png',
     name: 'Fanta',
-    price: 44.99,
     type: 'Refrigerante',
   ),
   Drink(
     photo: 'assets/images/soda_screen/logo_guarana_antarctica.png',
     name: 'Guaraná Antarctica',
-    price: 44.99,
     type: 'Refrigerante',
   ),
   Drink(
     photo: 'assets/images/soda_screen/logo_kuat.png',
     name: 'Kuat',
-    price: 44.99,
     type: 'Refrigerante',
   ),
   Drink(
     photo: 'assets/images/soda_screen/logo_sprite.png',
     name: 'Sprite',
-    price: 44.99,
     type: 'Refrigerante',
   ),
 ];
