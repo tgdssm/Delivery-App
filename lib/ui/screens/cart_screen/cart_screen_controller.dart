@@ -10,6 +10,7 @@ class CartScreenController extends GetxController {
   SnackBar deleteDismissedItem(int index) {
     backupItem = products.removeAt(index);
     final snackBar = SnackBar(
+      duration: Duration(milliseconds: 500),
       content: Container(
         child: Row(
           children: [

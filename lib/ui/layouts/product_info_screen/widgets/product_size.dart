@@ -22,7 +22,7 @@ class CheckBoxProductSize extends StatelessWidget {
                 activeColor: Theme.of(context).primaryColor,
                 value: sizeAndPrice,
                 groupValue: productInfoScreenController.sizeAndPrice,
-                onChanged: (value) {
+                onChanged: (Map<String, dynamic > value) {
                   productInfoScreenController.selectProductSizeAndPrice(value);
                 }),
           )),

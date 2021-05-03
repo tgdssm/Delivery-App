@@ -10,6 +10,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     _cartScreenController.products.forEach((element) {
       print(element['product'].name);
+      print(element['price']);
       print(element['size']);
       print(element['quantity']);
     });
@@ -81,7 +82,9 @@ class CartScreen extends StatelessWidget {
                                       if (constraints.maxWidth <=
                                           mobileBreakPointSmallWidth) {
                                         return Card(
-                                          margin: EdgeInsets.only(top: 5.0),
+                                          elevation: 2,
+                                          color: Color(0xfffcfcfc),
+                                          margin: EdgeInsets.symmetric(vertical: 5.0),
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(30.0)),
@@ -139,8 +142,7 @@ class CartScreen extends StatelessWidget {
                                                             Container(
                                                               child: Text(
                                                                 maskedMoney(
-                                                                    item['product']
-                                                                        .price),
+                                                                    item['price']),
                                                                 style: TextStyle(
                                                                     fontSize: 13.0,
                                                                     fontWeight:
@@ -231,7 +233,9 @@ class CartScreen extends StatelessWidget {
                                         );
                                       }
                                       return Card(
-                                        margin: EdgeInsets.only(top: 5.0),
+                                        elevation: 3,
+                                        color: Color(0xfffcfcfc),
+                                        margin: EdgeInsets.symmetric(vertical: 5.0),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30.0)),
@@ -288,8 +292,7 @@ class CartScreen extends StatelessWidget {
                                                           Container(
                                                             child: Text(
                                                               maskedMoney(
-                                                                  item['product']
-                                                                      .price),
+                                                                  item['price']),
                                                               style: TextStyle(
                                                                   fontSize: 18.0,
                                                                   fontWeight:
@@ -439,7 +442,29 @@ class CartScreen extends StatelessWidget {
                           },
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(height: 15.0,),
+                    Container(
+                      height: mainButtonHeight,
+                      child: FractionallySizedBox(
+                        widthFactor: .85,
+                        child: MaterialButton(
+                          onPressed: () {},
+                          child: Text(
+                            'Finalizar compra',
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          shape: RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.circular(30.0)),
+                          textColor: Colors.white,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 15.0,)
                   ],
                 ),
               ),

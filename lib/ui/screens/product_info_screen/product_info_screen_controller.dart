@@ -8,7 +8,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductInfoScreenController extends GetxController{
+class ProductInfoScreenController extends GetxController {
   final _cartScreenController = Get.put(CartScreenController());
   final _homeScreenController = Get.put(HomeScreenController());
   RxInt quantity = 1.obs;
@@ -39,23 +39,28 @@ class ProductInfoScreenController extends GetxController{
 
   SnackBar addProductToCart({Food food, Drink drink}) {
     Map<String, dynamic> productItem = {};
-    if(drink != null && sizeAndPrice != null){
-      drink.price = sizeAndPrice['price'];
+    if (drink != null && sizeAndPrice != null) {
+      productItem['price'] =
+          (drink.price == null) ? sizeAndPrice['price'] : drink.price;
       productItem['size'] = sizeAndPrice['size'];
-    }else if(food != null && food.type != 'Hambúrguer' && sizeAndPrice != null){
-      food.price = sizeAndPrice['price'];
-      productItem['size'] = sizeAndPrice['size'];
+    } else if (food != null) {
+      productItem['price'] =
+          (sizeAndPrice != null) ? sizeAndPrice['price'] : food.price;
+      if (food.type != 'Hambúrguer' && sizeAndPrice != null) {
+        productItem['size'] = sizeAndPrice['size'];
+      }
     }
     productItem['product'] = food ?? drink;
     productItem['quantity'] = quantity.value;
 
     // Verifica se o usuario escolheu o tamanho do produto
-    if((productItem['size'] == null && productItem['price'] == null)
-        && productItem['product'].type != 'Hambúrguer'){
+    if ((productItem['size'] == null && productItem['price'] == null) &&
+        productItem['product'].type != 'Hambúrguer') {
       final snackBar = SnackBar(
         content: AutoSizeText(
           'Selecione um tamanho',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           textAlign: TextAlign.center,
           maxLines: 1,
           minFontSize: 15,
@@ -68,18 +73,21 @@ class ProductInfoScreenController extends GetxController{
       );
       return snackBar;
     }
-
     // ProductItem sera adicionado ao carrinho
     if (!checkInCart(productItem)) {
-      _cartScreenController.products.add(productItem);
-      _homeScreenController.selectedTab.value = 0;
-      Get.offAll(HomeScreen());
       quantity.value = 1;
       sizeAndPrice = null;
+      _cartScreenController.products.add(productItem);
+      _cartScreenController.products.forEach((element) {
+        print('preco: ${element['product'].price}');
+      });
+      _homeScreenController.selectedTab.value = 0;
+      Get.offAll(HomeScreen());
       final snackBar = SnackBar(
         content: AutoSizeText(
           'Produto adicionado ao carrinho',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           textAlign: TextAlign.center,
           maxLines: 1,
           minFontSize: 15,
@@ -92,13 +100,14 @@ class ProductInfoScreenController extends GetxController{
       );
       return snackBar;
     } else {
-      Get.back(result: true);
       quantity.value = 1;
       sizeAndPrice = null;
+      Get.back(result: true);
       final snackBar = SnackBar(
         content: AutoSizeText(
           'Este produto já está no carrinho',
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+          style: TextStyle(
+              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
           textAlign: TextAlign.center,
           maxLines: 1,
           minFontSize: 15,
@@ -115,11 +124,12 @@ class ProductInfoScreenController extends GetxController{
 
   // Verifica se o produto ja existe dentro do carrinho
   bool checkInCart(Map<String, dynamic> productItem) {
-    for(Map element in _cartScreenController.products){
+    for (Map element in _cartScreenController.products) {
       if ((element['product'].name == productItem['product'].name) &&
-              (element['size'] == productItem['size'])){
+          (element['size'] == productItem['size'])) {
         return true;
       }
-    } return false;
+    }
+    return false;
   }
 }
