@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/data/models/drink.dart';
 import 'package:delivery_app/data/models/food.dart';
-import 'package:delivery_app/ui/layouts/product_info_screen/widgets/product_size.dart';
+import 'file:///E:/AndroidStudioProjects/Delivery-App/lib/ui/screens/product_info_screen/widgets/product_size.dart';
 import 'package:delivery_app/ui/screens/product_info_screen/product_info_screen_controller.dart';
 import 'package:delivery_app/utils/globals.dart';
 import 'package:flutter/material.dart';

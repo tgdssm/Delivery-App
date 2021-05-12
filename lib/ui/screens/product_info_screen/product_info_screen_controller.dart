@@ -39,20 +39,34 @@ class ProductInfoScreenController extends GetxController {
 
   SnackBar addProductToCart({Food food, Drink drink}) {
     Map<String, dynamic> productItem = {};
-    if (drink != null && sizeAndPrice != null) {
-      productItem['price'] =
-          (drink.price == null) ? sizeAndPrice['price'] : drink.price;
-      productItem['size'] = sizeAndPrice['size'];
-    } else if (food != null) {
-      productItem['price'] =
-          (sizeAndPrice != null) ? sizeAndPrice['price'] : food.price;
-      if (food.type != 'Hambúrguer' && sizeAndPrice != null) {
-        productItem['size'] = sizeAndPrice['size'];
-      }
-    }
+
     productItem['product'] = food ?? drink;
     productItem['quantity'] = quantity.value;
 
+    if (drink != null && sizeAndPrice != null) {
+
+      productItem['unit_price'] = sizeAndPrice['price'] ?? drink.price;
+
+      productItem['price'] = (drink.price == null)
+          ? (sizeAndPrice['price'] * productItem['quantity'])
+          : (drink.price * productItem['quantity']);
+
+      productItem['size'] = sizeAndPrice['size'];
+
+    } else if (food != null) {
+
+      productItem['unit_price'] =
+          (sizeAndPrice != null) ? sizeAndPrice['price'] : food.price;
+
+      if (food.type != 'Hambúrguer' && sizeAndPrice != null) {
+
+        productItem['size'] = sizeAndPrice['size'];
+        productItem['price'] = sizeAndPrice['price'] * productItem['quantity'];
+
+      } else if (food.type == 'Hambúrguer') {
+        productItem['price'] = food.price * productItem['quantity'];
+      }
+    }
     // Verifica se o usuario escolheu o tamanho do produto
     if ((productItem['size'] == null && productItem['price'] == null) &&
         productItem['product'].type != 'Hambúrguer') {
@@ -126,7 +140,7 @@ class ProductInfoScreenController extends GetxController {
   bool checkInCart(Map<String, dynamic> productItem) {
     for (Map element in _cartScreenController.products) {
       if ((element['product'].name == productItem['product'].name) &&
-          (element['size'] == productItem['size'])) {
+          (element['size']   == productItem['size'])) {
         return true;
       }
     }
