@@ -13,12 +13,12 @@ class ProductInfoScreenController extends GetxController {
   final _homeScreenController = Get.put(HomeScreenController());
   RxInt quantity = 1.obs;
 
-  Map<String, dynamic> sizeAndPrice;
+  Map<String, dynamic>? sizeAndPrice;
 
-  AnimationController animationController;
-  Animation<double> scaleAnimation;
+  late AnimationController animationController;
+  late Animation<double> scaleAnimation;
 
-  void selectProductSizeAndPrice(Map<String, dynamic> sizeAndPrice) {
+  void selectProductSizeAndPrice(Map<String, dynamic>? sizeAndPrice) {
     this.sizeAndPrice = sizeAndPrice;
     update(['productSize']);
   }
@@ -37,7 +37,7 @@ class ProductInfoScreenController extends GetxController {
     }
   }
 
-  SnackBar addProductToCart({Food food, Drink drink}) {
+  SnackBar addProductToCart({Food? food, Drink? drink}) {
     Map<String, dynamic> productItem = {};
 
     productItem['product'] = food ?? drink;
@@ -45,26 +45,26 @@ class ProductInfoScreenController extends GetxController {
 
     if (drink != null && sizeAndPrice != null) {
 
-      productItem['unit_price'] = sizeAndPrice['price'] ?? drink.price;
+      productItem['unit_price'] = sizeAndPrice!['price'] ?? drink.price;
 
       productItem['price'] = (drink.price == null)
-          ? (sizeAndPrice['price'] * productItem['quantity'])
-          : (drink.price * productItem['quantity']);
+          ? (sizeAndPrice!['price'] * productItem['quantity'])
+          : (drink.price! * productItem['quantity']);
 
-      productItem['size'] = sizeAndPrice['size'];
+      productItem['size'] = sizeAndPrice!['size'];
 
     } else if (food != null) {
 
       productItem['unit_price'] =
-          (sizeAndPrice != null) ? sizeAndPrice['price'] : food.price;
+          (sizeAndPrice != null) ? sizeAndPrice!['price'] : food.price;
 
       if (food.type != 'Hambúrguer' && sizeAndPrice != null) {
 
-        productItem['size'] = sizeAndPrice['size'];
-        productItem['price'] = sizeAndPrice['price'] * productItem['quantity'];
+        productItem['size'] = sizeAndPrice!['size'];
+        productItem['price'] = sizeAndPrice!['price'] * productItem['quantity'];
 
       } else if (food.type == 'Hambúrguer') {
-        productItem['price'] = food.price * productItem['quantity'];
+        productItem['price'] = food.price! * productItem['quantity'];
       }
     }
     // Verifica se o usuario escolheu o tamanho do produto

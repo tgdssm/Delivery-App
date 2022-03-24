@@ -6,11 +6,17 @@ import 'package:delivery_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class ProductInfoScreen extends StatelessWidget {
-  final _productInfoScreenController = Get.put(ProductInfoScreenController());
-  final Food food;
-  final Drink drink;
+class ProductInfoScreen extends StatefulWidget {
+  final Food? food;
+  final Drink? drink;
   ProductInfoScreen({this.food, this.drink});
+
+  @override
+  State<ProductInfoScreen> createState() => _ProductInfoScreenState();
+}
+
+class _ProductInfoScreenState extends State<ProductInfoScreen> {
+  final _productInfoScreenController = Get.put(ProductInfoScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +56,8 @@ class ProductInfoScreen extends StatelessWidget {
                       maxHeight: constraints.maxHeight,
                     ),
                     child: ProductInfoScreenContent(
-                      drink: drink,
-                      food: food,
-                      productInfoScreenController: _productInfoScreenController,
+                      drink: widget.drink,
+                      food: widget.food,
                     ),
                   )),
                 )

@@ -7,17 +7,22 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:delivery_app/data/models/drink.dart';
 
-class ProductInfoScreenContent extends StatelessWidget {
+class ProductInfoScreenContent extends StatefulWidget {
   const ProductInfoScreenContent({
-    Key key,
-    @required this.food,
-    @required this.drink,
-    @required this.productInfoScreenController,
+    Key? key,
+    this.food,
+    this.drink,
   }) : super(key: key);
 
-  final Food food;
-  final Drink drink;
-  final ProductInfoScreenController productInfoScreenController;
+  final Food? food;
+  final Drink? drink;
+
+  @override
+  State<ProductInfoScreenContent> createState() => _ProductInfoScreenContentState();
+}
+
+class _ProductInfoScreenContentState extends State<ProductInfoScreenContent> {
+  final _controller = Get.find<ProductInfoScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +56,7 @@ class ProductInfoScreenContent extends StatelessWidget {
               ),
               SliverList(
                   delegate: SliverChildListDelegate([
-                food != null
+                widget.food != null
                     ? Container(
                         padding: EdgeInsets.all(
                           18.0,
@@ -62,13 +67,13 @@ class ProductInfoScreenContent extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Hero(
-                              tag: food.photo,
+                              tag: widget.food!.photo,
                               child: Container(
                                 width: 240,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage(food.photo),
+                                      image: AssetImage(widget.food!.photo),
                                       fit: BoxFit.scaleDown),
                                 ),
                               ),
@@ -83,7 +88,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(horizontal: 25),
                                   alignment: Alignment.center,
                                   child: AutoSizeText(
-                                    food.name,
+                                    widget.food!.name,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
@@ -138,7 +143,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                                         alignment: Alignment.centerLeft,
                                         padding: EdgeInsets.only(left: 35.0),
                                         child: AutoSizeText(
-                                          '${productInfoScreenController.ingredients(food.ingredients)}.',
+                                          '${_controller.ingredients(widget.food!.ingredients)}.',
                                           style: TextStyle(
                                               color: Theme.of(context)
                                                   .primaryColor,
@@ -221,9 +226,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                                       context: context,
                                       builder: (context) {
                                         return QuantityAlert(
-                                            productInfoScreenController:
-                                                productInfoScreenController,
-                                            food: food);
+                                            food: widget.food);
                                       },
                                     );
                                   },
@@ -254,13 +257,13 @@ class ProductInfoScreenContent extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Hero(
-                              tag: drink.photo,
+                              tag: widget.drink!.photo,
                               child: Container(
                                 width: 240,
                                 height: 180,
                                 decoration: BoxDecoration(
                                   image: DecorationImage(
-                                      image: AssetImage(drink.photo),
+                                      image: AssetImage(widget.drink!.photo),
                                       fit: BoxFit.scaleDown),
                                 ),
                               ),
@@ -275,7 +278,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                                   padding: EdgeInsets.symmetric(horizontal: 25),
                                   alignment: Alignment.center,
                                   child: AutoSizeText(
-                                    drink.name,
+                                    widget.drink!.name,
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w600,
@@ -399,9 +402,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                                       context: context,
                                       builder: (context) {
                                         return QuantityAlert(
-                                            productInfoScreenController:
-                                                productInfoScreenController,
-                                            drink: drink);
+                                            drink: widget.drink);
                                       },
                                     );
                                   },
@@ -427,10 +428,10 @@ class ProductInfoScreenContent extends StatelessWidget {
           );
         }
         if (constraints.maxHeight <= mobileBreakPointMediumHeight) {
-          return food != null
+          return widget.food != null
               ? Container(
                   padding: EdgeInsets.all(
-                    18.0,
+                    15.0,
                   ),
                   color: Colors.white54,
                   child: Column(
@@ -438,13 +439,13 @@ class ProductInfoScreenContent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Hero(
-                        tag: food.photo,
+                        tag: widget.food!.photo,
                         child: Container(
                           width: 235,
                           height: 235,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage(food.photo),
+                                image: AssetImage(widget.food!.photo),
                                 fit: BoxFit.scaleDown),
                           ),
                         ),
@@ -456,7 +457,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 25),
                             alignment: Alignment.center,
                             child: AutoSizeText(
-                              food.name,
+                              widget.food!.name,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
@@ -509,7 +510,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                                 alignment: Alignment.centerLeft,
                                 padding: EdgeInsets.only(left: 35.0),
                                 child: AutoSizeText(
-                                  '${productInfoScreenController.ingredients(food.ingredients)}.',
+                                  '${_controller.ingredients(widget.food!.ingredients)}.',
                                   style: TextStyle(
                                       color: Theme.of(context).primaryColor,
                                       fontWeight: FontWeight.w300,
@@ -582,9 +583,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return QuantityAlert(
-                                    productInfoScreenController:
-                                        productInfoScreenController,
-                                    food: food);
+                                    food: widget.food);
                               },
                             );
                           },
@@ -604,7 +603,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                 )
               : Container(
                   padding: EdgeInsets.all(
-                    18.0,
+                    15.0,
                   ),
                   color: Colors.white54,
                   child: Column(
@@ -612,13 +611,13 @@ class ProductInfoScreenContent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Hero(
-                        tag: drink.photo,
+                        tag: widget.drink!.photo,
                         child: Container(
                           width: 235,
                           height: 235,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                                image: AssetImage(drink.photo),
+                                image: AssetImage(widget.drink!.photo),
                                 fit: BoxFit.scaleDown),
                           ),
                         ),
@@ -630,7 +629,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                             padding: EdgeInsets.symmetric(horizontal: 25),
                             alignment: Alignment.center,
                             child: AutoSizeText(
-                              drink.name,
+                              widget.drink!.name,
                               style: TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
@@ -705,9 +704,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                               context: context,
                               builder: (context) {
                                 return QuantityAlert(
-                                    productInfoScreenController:
-                                        productInfoScreenController,
-                                    drink: drink);
+                                    drink: widget.drink);
                               },
                             );
                           },
@@ -738,13 +735,13 @@ class ProductInfoScreenContent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Hero(
-                    tag: food.photo,
+                    tag: widget.food!.photo,
                     child: Container(
                       width: 240,
                       height: 240,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage(food.photo),
+                            image: AssetImage(widget.food!.photo),
                             fit: BoxFit.scaleDown),
                       ),
                     ),
@@ -756,9 +753,9 @@ class ProductInfoScreenContent extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 25),
                         alignment: Alignment.center,
                         child: Text(
-                          food.type != 'Hambúrguer'
-                              ? '${food.type} de ${food.name}'
-                              : food.name,
+                          widget.food!.type != 'Hambúrguer'
+                              ? '${widget.food!.type} de ${widget.food!.name}'
+                              : widget.food!.name,
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.w600,
@@ -773,7 +770,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                         padding: EdgeInsets.symmetric(horizontal: 25),
                         alignment: Alignment.center,
                         child: Text(
-                          maskedMoney(food.price),
+                          maskedMoney(widget.food!.price!),
                           style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.w600,
@@ -820,7 +817,7 @@ class ProductInfoScreenContent extends StatelessWidget {
                             alignment: Alignment.centerLeft,
                             padding: EdgeInsets.only(left: 35.0),
                             child: Text(
-                              '${productInfoScreenController.ingredients(food.ingredients)}.',
+                              '${_controller.ingredients(widget.food!.ingredients)}.',
                               style: TextStyle(
                                   color: Theme.of(context).primaryColor,
                                   fontWeight: FontWeight.w300,
@@ -887,8 +884,8 @@ class ProductInfoScreenContent extends StatelessWidget {
                     height: 70.0,
                     child: MaterialButton(
                       onPressed: () {
-                        productInfoScreenController.addProductToCart(
-                            food: food);
+                        _controller.addProductToCart(
+                            food: widget.food);
                       },
                       child: Text(
                         'Adicionar ao carrinho',

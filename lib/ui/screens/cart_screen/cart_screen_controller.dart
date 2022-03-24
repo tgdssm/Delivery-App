@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 class CartScreenController extends GetxController {
   RxList<Map<String, dynamic>> products = <Map<String, dynamic>>[].obs;
 
-  Map<String, dynamic> backupItem;
+  Map<String, dynamic>? backupItem;
 
   void addQuantity(Map<String, dynamic> product) {
     product['quantity'] += 1;

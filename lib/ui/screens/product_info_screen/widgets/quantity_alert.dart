@@ -1,17 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delivery_app/data/models/drink.dart';
 import 'package:delivery_app/data/models/food.dart';
-import 'file:///E:/AndroidStudioProjects/Delivery-App/lib/ui/screens/product_info_screen/widgets/product_size.dart';
 import 'package:delivery_app/ui/screens/product_info_screen/product_info_screen_controller.dart';
+import 'package:delivery_app/ui/screens/product_info_screen/widgets/product_size.dart';
 import 'package:delivery_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class QuantityAlert extends StatefulWidget {
-  final ProductInfoScreenController productInfoScreenController;
-  final Food food;
-  final Drink drink;
-  QuantityAlert({this.productInfoScreenController, this.food, this.drink});
+  final Food? food;
+  final Drink? drink;
+  QuantityAlert({this.food, this.drink});
 
   @override
   _QuantityAlertState createState() => _QuantityAlertState();
@@ -19,18 +18,20 @@ class QuantityAlert extends StatefulWidget {
 
 class _QuantityAlertState extends State<QuantityAlert>
     with TickerProviderStateMixin {
+
+  final _controller = Get.find<ProductInfoScreenController>();
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    widget.productInfoScreenController.animationController =
+    _controller.animationController =
         AnimationController(vsync: this, duration: Duration(milliseconds: 400));
-    widget.productInfoScreenController.scaleAnimation = CurvedAnimation(
-        parent: widget.productInfoScreenController.animationController,
+    _controller.scaleAnimation = CurvedAnimation(
+        parent: _controller.animationController,
         curve: Curves.easeInOutSine);
 
     // Executa a animação do início
-    widget.productInfoScreenController.animationController.forward();
+    _controller.animationController.forward();
   }
 
   @override
@@ -38,13 +39,13 @@ class _QuantityAlertState extends State<QuantityAlert>
     return LayoutBuilder(
       builder: (context, constraints) {
         return ScaleTransition(
-          scale: widget.productInfoScreenController.scaleAnimation,
+          scale: _controller.scaleAnimation,
           child: FractionallySizedBox(
             widthFactor: .75,
             // Verifica se drink != null para que se for falso, a tela possa se
             // adaptar ao tamanho necessario para comportar o menu de tamanhos se
             // food for do tipo Pizza,
-            heightFactor: ((widget.drink != null || widget.food.type != 'Hambúrguer')
+            heightFactor: ((widget.drink != null || widget.food!.type != 'Hambúrguer')
                 ? constraints.maxHeight <= mobileBreakPointSmallHeight
                     ? .63
                     : .53
@@ -64,7 +65,7 @@ class _QuantityAlertState extends State<QuantityAlert>
                   // Se for Pizza, abre o menu de tamanhos, se não, mostra a tela padrão
                   // Se drink for diferente de nulo,  abre o menu de tamanhos
                   widget.drink == null
-                      ? (widget.food.type == 'Pizza')
+                      ? (widget.food!.type == 'Pizza')
                           ? Container(
                               child: Column(
                                 children: [
@@ -85,24 +86,18 @@ class _QuantityAlertState extends State<QuantityAlert>
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         CheckBoxProductSize(
-                                          productInfoScreenController: widget
-                                              .productInfoScreenController,
                                           sizeAndPrice: {
                                             'size': 'P',
                                             'price': 25.0
                                           },
                                         ),
                                         CheckBoxProductSize(
-                                          productInfoScreenController: widget
-                                              .productInfoScreenController,
                                           sizeAndPrice: {
                                             'size': 'M',
                                             'price': 35.0
                                           },
                                         ),
                                         CheckBoxProductSize(
-                                          productInfoScreenController: widget
-                                              .productInfoScreenController,
                                           sizeAndPrice: {
                                             'size': 'G',
                                             'price': 45.0
@@ -137,7 +132,7 @@ class _QuantityAlertState extends State<QuantityAlert>
                         Container(
                           alignment: Alignment.center,
                           child: AutoSizeText(
-                            maskedMoney(widget.food.price),
+                            maskedMoney(widget.food!.price!),
                             style: TextStyle(
                                 color: Theme.of(context).primaryColor,
                                 fontSize: 20),
@@ -175,24 +170,18 @@ class _QuantityAlertState extends State<QuantityAlert>
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     CheckBoxProductSize(
-                                      productInfoScreenController:
-                                          widget.productInfoScreenController,
                                       sizeAndPrice: {
                                         'size': '350ml',
                                         'price': 2.0
                                       },
                                     ),
                                     CheckBoxProductSize(
-                                      productInfoScreenController:
-                                          widget.productInfoScreenController,
                                       sizeAndPrice: {
                                         'size': '1L',
                                         'price': 7.0
                                       },
                                     ),
                                     CheckBoxProductSize(
-                                      productInfoScreenController:
-                                          widget.productInfoScreenController,
                                       sizeAndPrice: {
                                         'size': '2L',
                                         'price': 10.0
@@ -237,8 +226,7 @@ class _QuantityAlertState extends State<QuantityAlert>
                               color: Theme.of(context).primaryColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0)),
-                              onPressed: widget
-                                  .productInfoScreenController.subtractQuantity,
+                              onPressed: _controller.subtractQuantity,
                             )),
                           ),
                         ),
@@ -246,7 +234,7 @@ class _QuantityAlertState extends State<QuantityAlert>
                               alignment: Alignment.center,
                               width: 60,
                               child: Text(
-                                '${widget.productInfoScreenController.quantity.value}',
+                                '${_controller.quantity.value}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 25),
                               ),
@@ -265,8 +253,7 @@ class _QuantityAlertState extends State<QuantityAlert>
                               color: Theme.of(context).primaryColor,
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30.0)),
-                              onPressed: widget
-                                  .productInfoScreenController.addQuantity,
+                              onPressed: _controller.addQuantity,
                             )),
                           ),
                         ),
@@ -300,10 +287,10 @@ class _QuantityAlertState extends State<QuantityAlert>
                                   borderRadius: BorderRadius.circular(30.0)),
                               onPressed: () {
                                 // Executa a animação de modo reverso(do final para o início)
-                                widget.productInfoScreenController
+                                _controller
                                     .animationController
                                     .reverse();
-                                widget.productInfoScreenController
+                                _controller
                                     .animationController
                                     .dispose();
                                 Get.back(result: true);
@@ -330,15 +317,13 @@ class _QuantityAlertState extends State<QuantityAlert>
                                   borderRadius: BorderRadius.circular(30.0)),
                               onPressed: () async {
                                 if (widget.food != null) {
-                                  final snackBar = widget
-                                      .productInfoScreenController
-                                      .addProductToCart(food: widget.food);
+                                  final snackBar = _controller
+                                      .addProductToCart(food: widget.food!);
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 } else {
-                                  final snackBar = widget
-                                      .productInfoScreenController
-                                      .addProductToCart(drink: widget.drink);
+                                  final snackBar = _controller
+                                      .addProductToCart(drink: widget.drink!);
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar);
                                 }

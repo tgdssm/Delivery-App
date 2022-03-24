@@ -4,10 +4,17 @@ import 'package:delivery_app/utils/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CheckBoxProductSize extends StatelessWidget {
-  final ProductInfoScreenController productInfoScreenController;
+class CheckBoxProductSize extends StatefulWidget {
   final Map<String, dynamic> sizeAndPrice;
-  CheckBoxProductSize({this.productInfoScreenController, this.sizeAndPrice});
+  CheckBoxProductSize({required this.sizeAndPrice});
+
+  @override
+  State<CheckBoxProductSize> createState() => _CheckBoxProductSizeState();
+}
+
+class _CheckBoxProductSizeState extends State<CheckBoxProductSize> {
+  final _controller = Get.find<ProductInfoScreenController>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -16,19 +23,19 @@ class CheckBoxProductSize extends StatelessWidget {
         children: [
           Material(
               child: GetBuilder(
-            init: productInfoScreenController,
+            init: _controller,
             id: 'productSize',
-            builder: (controller) => Radio(
+            builder: (controller) => Radio<Map<String, dynamic >>(
                 activeColor: Theme.of(context).primaryColor,
-                value: sizeAndPrice,
-                groupValue: productInfoScreenController.sizeAndPrice,
-                onChanged: (Map<String, dynamic > value) {
-                  productInfoScreenController.selectProductSizeAndPrice(value);
+                value: widget.sizeAndPrice,
+                groupValue: _controller.sizeAndPrice,
+                onChanged: (Map<String, dynamic >? value) {
+                  _controller.selectProductSizeAndPrice(value);
                 }),
           )),
           Container(
             child: AutoSizeText(
-              '${sizeAndPrice['size']} - ${maskedMoney(sizeAndPrice['price']).toString()}',
+              '${widget.sizeAndPrice['size']} - ${maskedMoney(widget.sizeAndPrice['price']).toString()}',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               maxLines: 1,
               minFontSize: 12,

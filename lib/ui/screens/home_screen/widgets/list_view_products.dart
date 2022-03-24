@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ListViewProducts extends StatelessWidget {
-  final List<Food> foods;
-  final List<Drink> drinks;
+  final List<Food>? foods;
+  final List<Drink>? drinks;
   ListViewProducts({this.foods, this.drinks});
 
   @override
@@ -20,10 +20,10 @@ class ListViewProducts extends StatelessWidget {
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: foods.length,
+            itemCount: foods!.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () => Get.to(ProductInfoScreen(food: foods[index])),
+                onTap: () => Get.to(ProductInfoScreen(food: foods![index])),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 5.0),
                   width: 180,
@@ -51,7 +51,7 @@ class ListViewProducts extends StatelessWidget {
                                   margin: EdgeInsets.only(top: 50.0),
                                   width: 100,
                                   child: AutoSizeText(
-                                    foods[index].name,
+                                    foods![index].name,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
@@ -70,13 +70,13 @@ class ListViewProducts extends StatelessWidget {
                           left: 25,
                           top: 0,
                           child: Hero(
-                            tag: foods[index].photo,
+                            tag: foods![index].photo,
                             child: Container(
                               width: 100,
                               height: 100,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                image: AssetImage(foods[index].photo),
+                                image: AssetImage(foods![index].photo),
                               )),
                             ),
                           ))
@@ -90,10 +90,10 @@ class ListViewProducts extends StatelessWidget {
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: drinks.length,
+            itemCount: drinks!.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () => Get.to(ProductInfoScreen(drink: drinks[index])),
+                onTap: () => Get.to(ProductInfoScreen(drink: drinks![index])),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 5.0),
                   // color: Colors.black,
@@ -122,7 +122,7 @@ class ListViewProducts extends StatelessWidget {
                                   margin: EdgeInsets.only(top: 30.0),
                                   width: 100,
                                   child: AutoSizeText(
-                                    drinks[index].name,
+                                    drinks![index].name,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
@@ -140,13 +140,13 @@ class ListViewProducts extends StatelessWidget {
                           left: 25,
                           top: 0,
                           child: Hero(
-                            tag: drinks[index].photo,
+                            tag: drinks![index].photo,
                             child: Container(
                               width: 100,
                               height: 100,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                image: AssetImage(drinks[index].photo),
+                                image: AssetImage(drinks![index].photo),
                               )),
                             ),
                           ))
@@ -163,10 +163,10 @@ class ListViewProducts extends StatelessWidget {
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: foods.length,
+            itemCount: foods!.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () => Get.to(ProductInfoScreen(food: foods[index])),
+                onTap: () => Get.to(ProductInfoScreen(food: foods![index])),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 5.0),
                   // color: Colors.black,
@@ -196,7 +196,7 @@ class ListViewProducts extends StatelessWidget {
                                   margin: EdgeInsets.only(top: 30.0),
                                   width: 150,
                                   child: Text(
-                                    foods[index].name,
+                                    foods![index].name,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
@@ -214,13 +214,13 @@ class ListViewProducts extends StatelessWidget {
                           left: 20,
                           top: 0,
                           child: Hero(
-                            tag: foods[index].photo,
+                            tag: foods![index].photo,
                             child: Container(
                               width: 150,
                               height: 150,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage(foods[index].photo),
+                                    image: AssetImage(foods![index].photo),
                                   )),
                             ),
                           ))
@@ -234,10 +234,10 @@ class ListViewProducts extends StatelessWidget {
           return ListView.builder(
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
-            itemCount: drinks.length,
+            itemCount: drinks!.length,
             itemBuilder: (context, index) {
               return GestureDetector(
-                onTap: () => Get.to(ProductInfoScreen(drink: drinks[index])),
+                onTap: () => Get.to(ProductInfoScreen(drink: drinks![index])),
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 5.0),
                   // color: Colors.black,
@@ -267,7 +267,7 @@ class ListViewProducts extends StatelessWidget {
                                   margin: EdgeInsets.only(top: 30.0),
                                   width: 150,
                                   child: Text(
-                                    drinks[index].name,
+                                    drinks![index].name,
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
@@ -283,13 +283,13 @@ class ListViewProducts extends StatelessWidget {
                           left: 20,
                           top: 0,
                           child: Hero(
-                            tag: drinks[index].photo,
+                            tag: drinks![index].photo,
                             child: Container(
                               width: 150,
                               height: 150,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                    image: AssetImage(drinks[index].photo),
+                                    image: AssetImage(drinks![index].photo),
                                   )),
                             ),
                           ))
@@ -304,10 +304,10 @@ class ListViewProducts extends StatelessWidget {
       return ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.horizontal,
-        itemCount: foods.length,
+        itemCount: foods!.length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () => Get.to(ProductInfoScreen(food: foods[index])),
+            onTap: () => Get.to(ProductInfoScreen(food: foods![index])),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 5.0),
               // color: Colors.black,
@@ -337,7 +337,7 @@ class ListViewProducts extends StatelessWidget {
                               margin: EdgeInsets.only(top: 30.0),
                               width: 150,
                               child: Text(
-                                foods[index].name,
+                                foods![index].name,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 20,
@@ -349,7 +349,7 @@ class ListViewProducts extends StatelessWidget {
                               padding: EdgeInsets.only(top: 10.0),
                               width: 100,
                               child: Text(
-                                '${maskedMoney(foods[index].price)}',
+                                '${maskedMoney(foods![index].price!)}',
                                 style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     color: Theme.of(context).primaryColor,
@@ -364,13 +364,13 @@ class ListViewProducts extends StatelessWidget {
                       left: 20,
                       top: 0,
                       child: Hero(
-                        tag: foods[index].photo,
+                        tag: foods![index].photo,
                         child: Container(
                           width: 150,
                           height: 150,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                            image: AssetImage(foods[index].photo),
+                            image: AssetImage(foods![index].photo),
                           )),
                         ),
                       ))

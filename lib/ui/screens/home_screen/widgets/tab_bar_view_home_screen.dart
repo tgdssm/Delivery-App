@@ -2,10 +2,19 @@ import 'package:delivery_app/ui/screens/home_screen/home_screen_controller.dart'
 import 'package:delivery_app/ui/screens/home_screen/widgets/list_view_products.dart';
 import 'package:delivery_app/utils/globals.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class TabBarViewHomeScreen extends StatelessWidget {
-  final HomeScreenController homeScreenController;
-  TabBarViewHomeScreen({this.homeScreenController});
+class TabBarViewHomeScreen extends StatefulWidget {
+
+  TabBarViewHomeScreen({Key? key});
+
+  @override
+  State<TabBarViewHomeScreen> createState() => _TabBarViewHomeScreenState();
+}
+
+class _TabBarViewHomeScreenState extends State<TabBarViewHomeScreen> {
+  final _controller = Get.find<HomeScreenController>();
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -20,7 +29,7 @@ class TabBarViewHomeScreen extends StatelessWidget {
                   height: 230,
                   width: constraints.maxWidth,
                   child: TabBarView(
-                      controller: homeScreenController.tabController,
+                      controller: _controller.tabController,
                       children: [
                         ListViewProducts(
                           foods: pizzas,

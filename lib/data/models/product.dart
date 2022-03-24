@@ -1,8 +1,8 @@
 class Product {
-  String name;
-  String photo;
-  double price;
-  String type;
+  late String name;
+  late String photo;
+  double? price;
+  late String type;
 
-  Product({this.price, this.photo, this.name, this.type});
+  Product({this.price, required this.photo, required this.name, required this.type});
 }

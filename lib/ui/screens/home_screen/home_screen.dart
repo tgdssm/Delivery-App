@@ -54,6 +54,7 @@ class _HomeScreenState extends State<HomeScreen>
                   DrawerItem(
                     leadingIcon: Icons.logout,
                     title: 'Sair',
+                    onTap: (){},
                   )
                 ],
               ),
@@ -62,7 +63,7 @@ class _HomeScreenState extends State<HomeScreen>
           Obx(() => TweenAnimationBuilder<double>(
               tween: Tween(begin: 0, end: _homeScreenController.tweenEndValue),
               duration: Duration(milliseconds: 300),
-              builder: (BuildContext _, double value, Widget __) {
+              builder: (BuildContext _, double value, Widget? __) {
                 return (Transform(
                   alignment: Alignment.center,
                   transform: Matrix4.identity()

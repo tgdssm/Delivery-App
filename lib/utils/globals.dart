@@ -1,6 +1,7 @@
 import 'package:delivery_app/data/models/drink.dart';
 import 'package:delivery_app/data/models/food.dart';
-import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:extended_masked_text/extended_masked_text.dart';
+
 
 final pizzas = [
   Food(
